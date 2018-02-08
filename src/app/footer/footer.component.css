@@ -1,0 +1,10 @@
+.footer {
+  width: 100%;
+  text-align: center;
+  font-size: 12px;
+  font-family: 'Ubuntu';
+  height: 35px;
+  background-image: url("../../assets/images/footer-background.png");
+  background-repeat: no-repeat;
+  padding-top: 12px;
+}

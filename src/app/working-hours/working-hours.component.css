@@ -1,0 +1,22 @@
+.day {
+  padding-top: 8px;
+  font-family: Roboto;
+  font-weight: bold;
+  font-size: 13px;
+  color: #5d7081;
+}
+
+input {
+  text-align: center;
+  color: #5d7081;
+}
+
+.arrow {
+  padding: 5px 0 0 5px;
+}
+.line {
+  margin-bottom: 30px;
+}
+
+
+

@@ -1,0 +1,58 @@
+.upload {
+}
+
+.upload a:before {
+  position: relative;
+  content: url('../../assets/images/vertical-bar-divider.png');
+  bottom: -4px;
+  margin-right: 5px;
+}
+
+.upload.name {
+  font-weight: 500;
+  font-size: 15px;
+  color: #5d7081;
+}
+
+.upload p {
+  display: inline;
+}
+
+a.upload-btn{
+  color: #30c171;
+}
+
+a.remove-btn {
+  color: #ed1919;
+}
+
+.photo-frame-small {
+  margin-top: 5px;
+  width: 100%;
+  padding-top: 100%;
+  border: 1px solid #b6c2cd;
+  border-radius: 5px;
+  background-size: 40%;
+}
+
+.photo-frame-big {
+  margin-top: 5px;
+  width: 100%;
+  padding-top: 75%;
+  border: 1px solid #b6c2cd;
+  border-radius: 5px;
+  background-size: 25%;
+}
+
+.photo-icon {
+  background-image: url('../../assets/images/photo.png');
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.photo-icon-plus {
+  background-image: url('../../assets/images/photo-plus.png');
+  background-position: center;
+  background-repeat: no-repeat;
+}
+

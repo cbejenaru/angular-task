@@ -1,0 +1,83 @@
+.step-progress {
+  height: 110px;
+  border-radius: 6px;
+  -webkit-box-shadow: 0px 0px 25px 0px rgba(168,168,168,1);
+  -moz-box-shadow: 0px 0px 25px 0px rgba(168,168,168,1);
+  box-shadow: 0px 0px 25px 0px rgba(168,168,168,1);
+  padding-top: 7px;
+  padding-left: 0px;
+}
+
+.container {
+  width: 100%;
+}
+
+.progressbar {
+  margin-left: 0px;
+}
+.progressbar li {
+  list-style-type: none;
+  float: left;
+  width: 14.28%;
+  position: relative;
+  text-align: left;
+
+
+}
+
+.progressbar li:after {
+  content: '';
+  width: 15px;
+  height: 15px;
+  border: 2px solid #b6c2cd;
+  display: block;
+  text-align: center;
+  margin-left: 8px;
+  border-radius: 50%;
+  padding: 2px;
+  background-color: #b6c2cd;
+  background-clip: content-box;
+}
+
+.progressbar li:before {
+  content: '';
+  position: absolute;
+  width: 65%;
+  margin-left: 30px;
+  height: 1px;
+  background-color: #dbdbdb;
+  bottom: 7px;
+}
+.progressbar li.active:after {
+  background-color: #30c171;
+}
+
+.progressbar li.done:after {
+  background-color: #30c171;
+}
+
+.progressbar li.done h1{
+  color: #30c171;
+}
+
+.progressbar li:last-child:before {
+  content: none;
+}
+
+.progressbar p {
+  font-family: Roboto;
+  font-size: 10px;
+  margin: 0 0 -2px 3px;
+  padding: 0px;
+
+}
+.progressbar h1 {
+  font-family: Roboto;
+  font-weight: bold;
+  margin:0 0 0 4px;
+  padding: 0 0 5px 0;
+}
+
+
+
+

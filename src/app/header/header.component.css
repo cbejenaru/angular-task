@@ -1,0 +1,36 @@
+.header {
+  /*height: 108px;*/
+  height: 70px;
+  background-image: url("../../assets/images/header-background.png");
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-position: top;
+  color: white;
+}
+
+.header-text {
+  color: white;
+  font-family: 'Roboto';
+  font-size: 12pt;
+  margin-top: 15px;
+  margin-right: 30px;
+}
+
+.header-right-button{
+  color: white;
+  font-family: 'Roboto-Medium';
+  font-size: 12pt;
+  margin-top: 8px;
+}
+
+li a {
+  color: white;
+}
+
+.logo {
+  margin: 0px;
+  padding: 4px;
+}
+
+
+

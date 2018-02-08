@@ -1,0 +1,16 @@
+.congrats {
+  font-family: Roboto;
+  font-weight: 600;
+  color: #7e93a8;
+}
+
+.congrats-message {
+  font-size: medium;
+  padding: 0 10px 0 10px;
+  text-align: center;
+  color: #7e93a8;
+}
+
+.congrats-message p {
+  margin: 0px;
+}

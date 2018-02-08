@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="col-xs-12">
+    <p class="title">aDDITIONS AND PRICES</p>
+  </div>
+</div>
+<div class="row">
+  <br>
+  <div class="col-xs-12">
+    <p style="text-transform: uppercase">Selectati toate elemente aditionale disponibile</p>
+  </div>
+</div>
+<form [formGroup]="form">
+  <div class="form-group">
+    <label class="top-offset">Bucatarie</label>
+    <iq-select2 css="form-control input-sm" placeholder="Start writing..." formControlName="countryMultipleMin0"
+                [dataSourceProvider]="listItems"
+                [iqSelect2ItemAdapter]="entityToIqSelect2Item"
+                [minimumInputLength]='0' referenceMode='entity' [multiple]='true' (onSelect)="onSelect($event)"
+                (onRemove)="onRemove($event)" [selectedProvider]="getItems" [clientMode]="true"></iq-select2>
+  </div>
+</form>
