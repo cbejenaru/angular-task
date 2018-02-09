@@ -1,13 +1,13 @@
 <div class="step-progress" style="background-color: white">
   <div class="cotainer">
     <ul class="progressbar">
-      <li class="done"><p>Step</p> <h1>1</h1></li>
-      <li  class="active"><p>Step</p> <h1>2</h1></li>
-      <li><p>Step</p> <h1>3</h1></li>
-      <li><p>Step</p> <h1>4</h1></li>
-      <li><p>Step</p> <h1>5</h1></li>
-      <li><p>Step</p> <h1>6</h1></li>
-      <li><p>Step</p> <h1>7</h1></li>
+      <li [ngClass]="{'active': isActive(1), 'done': isDone(1)}"><p>Step</p> <h1>1</h1></li>
+      <li [ngClass]="{'active': isActive(2), 'done': isDone(2)}"><p>Step</p> <h1>2</h1></li>
+      <li [ngClass]="{'active': isActive(3), 'done': isDone(3)}"><p>Step</p> <h1>3</h1></li>
+      <li [ngClass]="{'active': isActive(4), 'done': isDone(4)}"><p>Step</p> <h1>4</h1></li>
+      <li [ngClass]="{'active': isActive(5), 'done': isDone(5)}"><p>Step</p> <h1>5</h1></li>
+      <li [ngClass]="{'active': isActive(6), 'done': isDone(6)}"><p>Step</p> <h1>6</h1></li>
+      <li [ngClass]="{'active': isActive(7), 'done': isDone(7)}"><p>Step</p> <h1>7</h1></li>
     </ul>
   </div>
 </div>
