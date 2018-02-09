@@ -25,4 +25,5 @@ body {
   background-image: url("assets/images/backgrond.png");
   background-repeat: no-repeat;
   background-position: top;
+  background-attachment: fixed;
 }

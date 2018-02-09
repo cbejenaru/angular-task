@@ -14,9 +14,11 @@ import {MultiselectDropdownModule} from 'angular-2-dropdown-multiselect';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AngularMultiSelectModule} from 'angular2-multiselect-dropdown';
 import {IqSelect2Module} from './filters/component-wrapper/src/app/iq-select2.module';
-import {DataService} from './filters/data.service';
-import { AdditionsAndPricesComponent } from './additions-and-prices/additions-and-prices.component';
-import { CongratsLastComponent } from './congrats-last/congrats-last.component';
+import {AdditionsAndPricesComponent} from './additions-and-prices/additions-and-prices.component';
+import {CongratsLastComponent} from './congrats-last/congrats-last.component';
+import {AppRoutingModule} from './app-routing.module';
+import {NavigationButtonsComponent} from './navigation-buttons/navigation-buttons.component';
+import {NavigationService} from './navigation.service';
 
 
 @NgModule({
@@ -32,16 +34,18 @@ import { CongratsLastComponent } from './congrats-last/congrats-last.component';
     FiltersComponent,
     AdditionsAndPricesComponent,
     CongratsLastComponent,
+    NavigationButtonsComponent
   ],
   imports: [
     BrowserModule,
+    AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     MultiselectDropdownModule,
     AngularMultiSelectModule,
     IqSelect2Module
   ],
-  providers: [],
+  providers: [NavigationService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
