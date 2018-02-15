@@ -1,70 +1,160 @@
 <div class="row">
   <div class="col-xs-12">
-    <p class="title"> LOCATION INFO</p>
+    <p class="title">Location info</p>
   </div>
 </div>
+<form [formGroup]="locationInfoForm" (ngSubmit)="onNext()">
+  <div class="row">
+    <div class="col-md-6 col-xs-12">
+      <label class="top-offset" for="company">Denumirea juridica</label>
+      <input
+        class="form-control"
+        id="company"
+        formControlName="company">
+    </div>
+  </div>
 
-<div class="row">
-  <div class="col-md-6 col-xs-12">
-    <label class="top-offset" for="denumire-juridica">Denumirea juridica</label>
-    <input class="form-control" id="denumire-juridica" value="STAR HOLDING" disabled>
+  <div class="row">
+    <div class="col-md-6 col-xs-12">
+      <div class="form-group">
+        <span>
+          <label class="top-offset" for="comercialName">Denumirea comerciala</label>
+          <span
+            *ngIf="!locationInfoForm.get('comercialName').valid && locationInfoForm.get('comercialName').touched"
+            class="validation-advice">
+              <span *ngIf="locationInfoForm.get('comercialName').errors['required']">Obligatoriu</span>
+              <span *ngIf="locationInfoForm.get('comercialName').errors['maxlength']">Maxim 25 caractere</span>
+          </span>
+        </span>
+        <input
+          class="form-control"
+          id="comercialName"
+          formControlName="comercialName">
+      </div>
+    </div>
+    <div class="col-md-6 col-xs-12">
+      <div class="row">
+        <div class="col-md-6">
+        <span>
+            <label class="top-offset" for="discount">Reducere</label>
+            <span
+              *ngIf="!locationInfoForm.get('discount').valid && locationInfoForm.get('discount').touched"
+              class="validation-advice">
+              <span *ngIf="locationInfoForm.get('discount').errors['required']">Obligatoriu</span>
+              <span
+                *ngIf="locationInfoForm.get('discount').errors['invalidRange'] && !locationInfoForm.get('discount').errors['required']">7 - 100</span>
+            </span>
+          </span>
+          <div class="input-group">
+            <input
+              class="form-control"
+              formControlName="discount"
+              type="number"
+              id="discount"
+              aria-describedby="AddonPercentage">
+            <span class="input-group-addon" id="AddonPercetange">%</span>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="checkbox check">
+            <label class="top-offset">
+              <input type="checkbox" formControlName="reservation">
+              Activarea bronarii</label>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
-<div class="row">
-  <div class="col-md-6 col-xs-12">
-    <div class="form-group">
-      <label class="top-offset" for="denumire-comerciala">Denumirea comerciala</label>
-      <input class="form-control" id="denumire-comerciala">
-      <label class="top-offset" for="categorie">Categorie</label>
-      <select class="form-control" id="categorie">
-        <option>-</option>
+
+  <div class="row">
+    <div class="col-md-6 col-xs-12">
+      <span>
+      <label class="top-offset" for="category">Categorie</label>
+      <span
+        *ngIf="!locationInfoForm.get('category').valid && locationInfoForm.get('category').touched"
+        class="validation-advice"
+      >Obligatoriu</span>
+      </span>
+      <select
+        class="form-control"
+        id="category"
+        formControlName="category">
         <option>1</option>
         <option>2</option>
         <option>3</option>
         <option>4</option>
         <option>5</option>
       </select>
-      <label class="top-offset" for="descriereRo">Descriere RO</label>
-      <textarea class="form-control" id="descriereRo" rows="5"></textarea>
+    </div>
+    <div class="col-md-6 col-xs-12">
+    <span>
+        <label class="top-offset" for="averagePrice">Selectati suma media comenzii unici</label>
+        <span
+          *ngIf="!locationInfoForm.get('averagePrice').valid && locationInfoForm.get('averagePrice').touched"
+          class="validation-advice">
+              <span *ngIf="locationInfoForm.get('averagePrice').errors['required']">Obligatoriu</span>
+        </span>
+      </span>
+      <select
+        class="form-control"
+        id="averagePrice"
+        formControlName="averagePrice">
+        <option>100 - 200</option>
+        <option>200 - 500</option>
+        <option>500 - 1000</option>
+      </select>
     </div>
   </div>
-  <div class="col-md-6 col-xs-12">
-    <div class="row">
-      <div class="col-xs-6">
-        <label class="top-offset" for="reducere">Reducere</label>
-        <div class="input-group">
-          <input class="form-control" type="text" id="reducere" aria-describedby="AddonPercentage">
-          <span class="input-group-addon" id="AddonPercetange">%</span>
+
+  <div class="row">
+    <div class="col-md-6 col-xs-12">
+      <span>
+      <label class="top-offset" for="descriptionRo">Descriere RO</label>
+      <span
+        *ngIf="!locationInfoForm.get('descriptionRo').valid && locationInfoForm.get('descriptionRo').touched"
+        class="validation-advice">
+              <span *ngIf="locationInfoForm.get('descriptionRo').errors['required']">Obligatoriu</span>
+              <span *ngIf="locationInfoForm.get('descriptionRo').errors['maxlength']">Maxim 250 caractere</span>
+          </span>
+      </span>
+      <textarea
+        class="form-control"
+        id="descriptionRo"
+        rows="5"
+        formControlName="descriptionRo"
+      ></textarea>
+    </div>
+    <div class="col-md-6 col-xs-12">
+      <span>
+      <label class="top-offset" for="descriptionRu">Descriere RU</label>
+      <span class="validation-advice"
+            *ngIf="!locationInfoForm.get('descriptionRu').valid && locationInfoForm.get('descriptionRu').touched">
+          <span *ngIf="locationInfoForm.get('descriptionRu').errors['required']">Obligatoriu</span>
+          <span *ngIf="locationInfoForm.get('descriptionRu').errors['maxlength']">Maxim 250 caractere</span>
+        </span>
+      </span>
+      <textarea
+        class="form-control"
+        id="descriptionRu"
+        rows="5"
+        formControlName="descriptionRu"></textarea>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <p class="form-validation-advice">{{ (!validForm) ? 'Informatia nu este valida!' : ''}}</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-6 col-xs-offset-6">
+      <div class="row">
+        <div class="col-xs-6">
+          <button class="btn btn-block"><p class="btn-text" (click)="onCancel()">Cancel</p></button>
         </div>
-      </div>
-      <div class="col-xs-6">
-        <div class="checkbox check">
-          <label class="top-offset"><input type="checkbox" value="">Activarea bronarii</label>
+        <div class="col-xs-6">
+          <button class="btn btn-success btn-block" type="submit">Next</button>
         </div>
       </div>
     </div>
-
-    <label class="top-offset" for="select-suma">Selectati suma media comenzii unici</label>
-    <select class="form-control" id="select-suma">
-      <option>-</option>
-      <option>100 - 200</option>
-      <option>200 - 500</option>
-      <option>500 - 1000</option>
-    </select>
-
-    <label class="top-offset" for="descriereRu">Descriere RU</label>
-    <textarea class="form-control" id="descriereRu" rows="5"></textarea>
-    <br>
-    <!--<div class="row">-->
-      <!--<div class="col-xs-6">-->
-        <!--<button class="btn btn-block"><p class="btn-text">Cancel</p></button>-->
-      <!--</div>-->
-      <!--<div class="col-xs-6">-->
-        <!--<button class="btn btn-success btn-block" (click)="onNext()">Next</button>-->
-      <!--</div>-->
-    <!--</div>-->
   </div>
-</div>
-<app-navigation-buttons></app-navigation-buttons>
-
-
+</form>
