@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {Form, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+
 import {NavigationService} from '../navigation.service';
+import Utils from '../shared/utils';
 
 @Component({
   selector: 'app-location-info',
@@ -10,7 +12,6 @@ import {NavigationService} from '../navigation.service';
 })
 export class LocationInfoComponent implements OnInit {
   locationInfoForm: FormGroup;
-  validForm = true;
 
   constructor(private router: Router,
               private navService: NavigationService) {
@@ -31,13 +32,10 @@ export class LocationInfoComponent implements OnInit {
 
   onNext() {
     if (this.locationInfoForm.valid) {
-      this.validForm = true;
-      this.navService.currentStep++;
-      this.router.navigate(['step', '2']);
+      this.router.navigate(['step', ++this.navService.currentStep]);
       console.log(this.locationInfoForm);
     } else {
-      this.validForm = false;
-      this.markFormGroupTouched(this.locationInfoForm);
+      Utils.markFormGroupTouched(this.locationInfoForm);
     }
   }
 
@@ -50,16 +48,6 @@ export class LocationInfoComponent implements OnInit {
       return {'invalidRange': true};
     }
     return null;
-  }
-
-  private markFormGroupTouched(formGroup: FormGroup) {
-    (<any>Object).values(formGroup.controls).forEach(control => {
-      control.markAsTouched();
-
-      if (control.controls) {
-        control.controls.forEach(c => this.markFormGroupTouched(c));
-      }
-    });
   }
 
 }
