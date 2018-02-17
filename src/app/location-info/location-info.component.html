@@ -16,21 +16,19 @@
 
   <div class="row">
     <div class="col-md-6 col-xs-12">
-      <div class="form-group">
         <span>
           <label class="top-offset" for="comercialName">Denumirea comerciala</label>
           <span
             *ngIf="!locationInfoForm.get('comercialName').valid && locationInfoForm.get('comercialName').touched"
-            class="validation-advice">
+            class="validation-advice validation-advice-text">
               <span *ngIf="locationInfoForm.get('comercialName').errors['required']">Obligatoriu</span>
               <span *ngIf="locationInfoForm.get('comercialName').errors['maxlength']">Maxim 25 caractere</span>
           </span>
         </span>
-        <input
-          class="form-control"
-          id="comercialName"
-          formControlName="comercialName">
-      </div>
+      <input
+        class="form-control"
+        id="comercialName"
+        formControlName="comercialName">
     </div>
     <div class="col-md-6 col-xs-12">
       <div class="row">
@@ -39,7 +37,7 @@
             <label class="top-offset" for="discount">Reducere</label>
             <span
               *ngIf="!locationInfoForm.get('discount').valid && locationInfoForm.get('discount').touched"
-              class="validation-advice">
+              class="validation-advice validation-advice-text">
               <span *ngIf="locationInfoForm.get('discount').errors['required']">Obligatoriu</span>
               <span
                 *ngIf="locationInfoForm.get('discount').errors['invalidRange'] && !locationInfoForm.get('discount').errors['required']">7 - 100</span>
@@ -72,7 +70,7 @@
       <label class="top-offset" for="category">Categorie</label>
       <span
         *ngIf="!locationInfoForm.get('category').valid && locationInfoForm.get('category').touched"
-        class="validation-advice"
+        class="validation-advice validation-advice-text"
       >Obligatoriu</span>
       </span>
       <select
@@ -91,7 +89,7 @@
         <label class="top-offset" for="averagePrice">Selectati suma media comenzii unici</label>
         <span
           *ngIf="!locationInfoForm.get('averagePrice').valid && locationInfoForm.get('averagePrice').touched"
-          class="validation-advice">
+          class="validation-advice validation-advice-text">
               <span *ngIf="locationInfoForm.get('averagePrice').errors['required']">Obligatoriu</span>
         </span>
       </span>
@@ -112,7 +110,7 @@
       <label class="top-offset" for="descriptionRo">Descriere RO</label>
       <span
         *ngIf="!locationInfoForm.get('descriptionRo').valid && locationInfoForm.get('descriptionRo').touched"
-        class="validation-advice">
+        class="validation-advice validation-advice-text">
               <span *ngIf="locationInfoForm.get('descriptionRo').errors['required']">Obligatoriu</span>
               <span *ngIf="locationInfoForm.get('descriptionRo').errors['maxlength']">Maxim 250 caractere</span>
           </span>
@@ -127,7 +125,7 @@
     <div class="col-md-6 col-xs-12">
       <span>
       <label class="top-offset" for="descriptionRu">Descriere RU</label>
-      <span class="validation-advice"
+      <span class="validation-advice validation-advice-text"
             *ngIf="!locationInfoForm.get('descriptionRu').valid && locationInfoForm.get('descriptionRu').touched">
           <span *ngIf="locationInfoForm.get('descriptionRu').errors['required']">Obligatoriu</span>
           <span *ngIf="locationInfoForm.get('descriptionRu').errors['maxlength']">Maxim 250 caractere</span>
@@ -140,11 +138,7 @@
         formControlName="descriptionRu"></textarea>
     </div>
   </div>
-  <div class="row">
-    <div class="col-xs-12">
-      <p class="form-validation-advice">{{ (!validForm) ? 'Informatia nu este valida!' : ''}}</p>
-    </div>
-  </div>
+  <br>
   <div class="row">
     <div class="col-xs-6 col-xs-offset-6">
       <div class="row">

@@ -2,7 +2,9 @@
   padding-top: 105px;
   margin: 0px;
 }
-
+div.content div.row {
+  margin: 0px;
+}
 .page {
   margin-top: 30px;
   margin-bottom: 30px;
@@ -57,23 +59,18 @@ p {
 input.ng-invalid.ng-touched,
 textarea.ng-invalid.ng-touched,
 select.ng-invalid.ng-touched {
-  border: 1px solid red;
+  border: 1px solid #c13330;
 }
 
 .validation-advice {
   position: absolute;
   right: 15px;
-  margin-top: 18px;
+  margin-top: 15px;
+}
+
+.validation-advice-text {
   font-family: 'Roboto';
   font-weight: normal;
   font-size: 12px;
-  color: #c13330;
-}
-
-.form-validation-advice {
-  margin-top: 18px;
-  font-family: 'Roboto';
-  font-weight: normal;
-  font-size: 14px;
   color: #c13330;
 }
