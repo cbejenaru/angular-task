@@ -3,41 +3,97 @@
     <p class="title"> CONTACT DATA</p>
   </div>
 </div>
-<div class="row">
-  <div class="col-xs-6">
-    <div class="form-group">
-      <label class="top-offset" for="contact-first-name">Contact first name</label>
-      <input class="form-control" id="contact-first-name">
-      <label class="top-offset" for="contact-last-name">Contact last name</label>
-      <input class="form-control" id="contact-last-name">
-      <label class="top-offset" for="phone-number">Phone number</label>
-      <input class="form-control" id="phone-number">
-      <label class="top-offset" for="country">Country</label>
-      <input class="form-control" id="country">
-      <label class="top-offset" for="city">City</label>
-      <input class="form-control" id="city">
-      <label class="top-offset" for="street">Street</label>
-      <input class="form-control" id="street">
-      <label class="top-offset" for="post-code">Post Code</label>
-      <input class="form-control" id="post-code">
+<form [formGroup]="contactDataForm" (ngSubmit)="onNext()" autocomplete="false">
+  <div class="row">
+    <div class="col-md-6 col-xs-12">
+      <div class="form-group">
+
+        <label class="top-offset" for="contact-first-name">Contact first name</label>
+        <input
+          class="form-control"
+          id="contact-first-name"
+          formControlName="firstName">
+        <label class="top-offset" for="contact-last-name">Contact last name</label>
+        <input
+          class="form-control"
+          id="contact-last-name"
+          formControlName="lastName">
+        <label class="top-offset" for="phone-number">Phone number</label>
+        <span
+          class="validation-advice validation-advice-text"
+          *ngIf="contactDataForm.get('phoneNumber').invalid">
+          Format: +373 999-99-999
+        </span>
+        <input
+          class="form-control"
+          id="phone-number"
+          formControlName="phoneNumber"
+        >
+        <label class="top-offset" for="country">Country</label>
+        <span
+          class="validation-advice validation-advice-text"
+          *ngIf="contactDataForm.get('country').invalid && contactDataForm.get('country').touched">
+          Obligatoriu
+        </span>
+        <input
+          class="form-control"
+          id="country"
+          formControlName="country">
+        <label class="top-offset" for="city">City</label>
+        <span
+          class="validation-advice validation-advice-text"
+          *ngIf="contactDataForm.get('city').invalid && contactDataForm.get('city').touched">
+          Obligatoriu
+        </span>
+        <input
+          class="form-control"
+          id="city"
+          formControlName="city">
+        <label class="top-offset" >Street</label>
+        <span
+          class="validation-advice validation-advice-text"
+          *ngIf="contactDataForm.get('street').invalid && contactDataForm.get('street').touched">
+          Obligatoriu
+        </span>
+        <input
+          class="form-control"
+          placeholder=""
+          autocomplete="off"
+          autocorrect="off"
+          autocapitalize="off"
+          spellcheck="off"
+          type="text"
+          formControlName="street"
+          #street>
+        <label class="top-offset" for="post-code">Post Code</label>
+        <input
+          class="form-control"
+          id="post-code"
+          formControlName="postCode"
+          (focus)="setMarker({address: this.contactDataForm.get('street').value})">
+      </div>
+    </div>
+    <div class="col-md-6 col-xs-12">
+      <br>
+      <div #gmap class="map"></div>
+      <br><br>
     </div>
   </div>
-  <div class="col-xs-6">
-    <!--<app-google-maps-->
-      <!--lat="51.507351"-->
-      <!--lng="-0.127758"-->
-      <!--apikey="AIzaSyBziYzXDbNPSuTisBwAIjfpM4jbuQth9mo">-->
-    <!--</app-google-maps>-->
+  <div class="row">
+    <div class="col-xs-12 col-md-9 col-md-offset-3">
+      <div class="row">
+        <div class="col-xs-4">
+          <div>
+            <button class="btn btn-back btn-block" type="button" (click)="onBack()"><p class="btn-text">Back</p></button>
+          </div>
+        </div>
+        <div class="col-xs-4">
+          <button class="btn btn-block" type="button" (click)="onCancel()"><p class="btn-text">Cancel</p></button>
+        </div>
+        <div class="col-xs-4">
+          <button class="btn btn-success btn-block" type="submit"><p class="btn-text">Next</p></button>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
-<app-navigation-buttons></app-navigation-buttons>
-<!--<div class="row">-->
-  <!--<div class="col-md-3 col-md-offset-6 col-xs-6">-->
-    <!--<button class="btn btn-block"><p class="btn-text">Cancel</p></button>-->
-  <!--</div>-->
-  <!--<div class="col-md-3 col-xs-6">-->
-    <!--<button class="btn btn-success btn-block">Next</button>-->
-  <!--</div>-->
-<!--</div>-->
-
-
+</form>

@@ -40,7 +40,7 @@ export class LocationInfoComponent implements OnInit {
   }
 
   onCancel() {
-    this.locationInfoForm.reset();
+    this.locationInfoForm.reset({company: 'STAR HOLDING!'});
   }
 
   discountValidator(control: FormControl): { [s: string]: boolean } {
