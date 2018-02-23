@@ -1,11 +1,10 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {} from '@types/googlemaps';
+
 import Utils from '../shared/utils';
 import {NavigationService} from '../navigation.service';
-import {Router} from '@angular/router';
-import GeocoderResult = google.maps.GeocoderResult;
-import GeocoderStatus = google.maps.GeocoderStatus;
-import GeocoderRequest = google.maps.GeocoderRequest;
 
 @Component({
   selector: 'app-contact-data',
@@ -63,8 +62,8 @@ export class ContactDataComponent implements OnInit {
       this.geocoder.geocode(
         {
           location: this.marker.getPosition()
-        }, (results: GeocoderResult[], status: GeocoderStatus) => {
-          if (status === GeocoderStatus.OK) {
+        }, (results: google.maps.GeocoderResult[], status: google.maps.GeocoderStatus) => {
+          if (status === google.maps.GeocoderStatus.OK) {
             const address = results[0].formatted_address.split(',');
             this.contactDataForm.get('country').setValue(address[2]);
             this.contactDataForm.get('city').setValue(address[1]);
@@ -134,9 +133,9 @@ export class ContactDataComponent implements OnInit {
     this.marker.setPosition(this.chisinauLatLng);
   }
 
-  setMarker(request: GeocoderRequest) {
-    this.geocoder.geocode(request, (results: GeocoderResult[], status: GeocoderStatus) => {
-        if (status === GeocoderStatus.OK) {
+  setMarker(request: google.maps.GeocoderRequest) {
+    this.geocoder.geocode(request, (results: google.maps.GeocoderResult[], status: google.maps.GeocoderStatus) => {
+        if (status === google.maps.GeocoderStatus.OK) {
           const geocoderLocation = results[0].geometry.location;
           this.marker.setPosition(geocoderLocation);
           this.map.setCenter(geocoderLocation);
