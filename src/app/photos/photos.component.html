@@ -12,6 +12,8 @@
       Lorem Ipsum is that it has a more-or-less normal. </p>
   </div>
 </div>
+<!--====-->
+
 
 <!--MINIATURE-->
 <div class="row">
@@ -19,14 +21,37 @@
     <br>
     <div class="upload">
       <p class="name">MINIATURE</p>
-      <a href="#" class="upload-btn">Upload</a>
-      <!--<a href="#" class="remove-btn">Remove</a>-->
+
+      <label *ngIf="!miniatureSaved" class="upload-btn">
+        <span *ngIf="!miniatureImageLoaded">Upload<input type="file" (change)="fileChangeEvent($event, 'miniature')"
+                                                         style="display: none;"/></span>
+        <span *ngIf="miniatureImageLoaded" (click)="onSave('miniature')">Save</span>
+      </label>
+      <a class="remove-btn" *ngIf="miniatureImageLoaded" (click)="onRemove('miniature')">Remove</a>
       <div class="row">
-        <div class="col-xs-6">
-          <div class="photo-frame-small photo-icon"></div>
+        <div *ngIf="!miniatureSaved" class="col-xs-6">
+          <div class="photo-frame-small photo-icon">
+            <div>
+              <image-cropper
+                style="width: 100%;"
+                [imageChangedEvent]="miniatureImageChangedEvent"
+                [maintainAspectRatio]="true"
+                [aspectRatio]="1 / 1"
+                [resizeToWidth]="750"
+                format="png"
+                (imageCropped)="imageCropped($event, 'miniature')"
+                (imageLoaded)="onImageLoaded()"
+                (loadImageFailed)="loadImageFailed()"
+              ></image-cropper>
+            </div>
+          </div>
         </div>
         <div class="col-xs-6">
-          <div class="photo-frame-small"></div>
+          <div class="photo-frame-small">
+            <div>
+              <img [src]="miniatureSaved? miniatureURL : miniatureCroppedImage" style="height: 100%; max-width: 100%"/>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -39,19 +64,41 @@
   <div class="row">
     <div class="col-xs-6">
       <p class="name">BANNER</p>
-      <a href="#" class="upload-btn">Upload</a>
-      <!--<a href="#" class="remove-btn">Remove</a>-->
+      <label *ngIf="!bannerSaved" class="upload-btn">
+        <span *ngIf="!bannerImageLoaded">Upload<input type="file" (change)="fileChangeEvent($event, 'banner')"
+                                                      style="display: none;"/></span>
+        <span *ngIf="bannerImageLoaded" (click)="onSave('banner')">Save</span>
+      </label>
+      <a class="remove-btn" *ngIf="bannerImageLoaded" (click)="onRemove('banner')">Remove</a>
     </div>
-    <div class="col-xs-6">
+    <div *ngIf="!bannerSaved" class="col-xs-6">
       <p class="name">CROP IMAGE</p>
     </div>
   </div>
   <div class="row">
-    <div class="col-xs-6">
-      <div class="photo-frame-big photo-icon"></div>
+    <div *ngIf="!bannerSaved" class="col-xs-6">
+      <div class="photo-frame-big photo-icon">
+        <div>
+          <image-cropper
+            style="width: 100%;"
+            [imageChangedEvent]="bannerImageChangedEvent"
+            [maintainAspectRatio]="true"
+            [aspectRatio]="4 / 3"
+            [resizeToWidth]="750"
+            format="png"
+            (imageCropped)="imageCropped($event, 'banner')"
+            (imageLoaded)="onImageLoaded()"
+            (loadImageFailed)="loadImageFailed()"
+          ></image-cropper>
+        </div>
+      </div>
     </div>
     <div class="col-xs-6">
-      <div class="photo-frame-big"></div>
+      <div class="photo-frame-big">
+        <div>
+          <img [src]="bannerSaved? bannerURL : bannerCroppedImage" style="height: 100%; max-width: 100%"/>
+        </div>
+      </div>
     </div>
   </div>
   <br>
@@ -62,8 +109,12 @@
   <div class="row">
     <div class="col-xs-6">
       <p class="name">GALLERY</p>
-      <a href="#" class="upload-btn">Upload</a>
-      <a href="#" class="remove-btn">Remove</a>
+      <label class="upload-btn">
+        <span *ngIf="!galleryImageLoaded">Upload<input type="file" (change)="fileChangeEvent($event, 'gallery')"
+                                                       style="display: none;"/></span>
+        <span *ngIf="galleryImageLoaded" (click)="onSave('gallery')">Save</span>
+      </label>
+      <a class="remove-btn" *ngIf="galleryImageLoaded" (click)="onRemove('gallery')">Remove</a>
     </div>
     <div class="col-xs-6">
       <p class="name">CROP IMAGE</p>
@@ -71,21 +122,63 @@
   </div>
   <div class="row">
     <div class="col-xs-6">
-      <div class="photo-frame-big photo-icon"></div>
+      <div class="photo-frame-big photo-icon">
+        <div>
+          <image-cropper
+            style="width: 100%;"
+            [imageChangedEvent]="galleryImageChangedEvent"
+            [maintainAspectRatio]="true"
+            [aspectRatio]="4 / 3"
+            [resizeToWidth]="750"
+            format="png"
+            (imageCropped)="imageCropped($event, 'gallery')"
+            (imageLoaded)="onImageLoaded()"
+            (loadImageFailed)="loadImageFailed()"
+          ></image-cropper>
+        </div>
+      </div>
     </div>
     <div class="col-xs-6">
-      <div class="photo-frame-big"></div>
+      <div class="photo-frame-big">
+        <div>
+          <img [src]="galleryCroppedImage" style="height: 100%; max-width: 100%"/>
+        </div>
+      </div>
     </div>
   </div>
   <br>
   <div class="row">
-    <div class="col-xs-6">
-      <div class="photo-frame-big photo-icon-plus"></div>
+    <div *ngFor="let imgSrc of galleryURLs; let i = index" class="col-xs-6">
+      <div class="photo-frame-big">
+        <div>
+          <div class="close-icon" (click)="onGalleryClose(i)"></div>
+          <img src="{{ imgSrc }}" alt="img" style="height: 100%; max-width: 100%">
+        </div>
+      </div>
     </div>
   </div>
   <br>
 </div>
 
+<!--<div class="row">-->
+<!--<div class="col-xs-12">-->
+<!--<input type="file" (change)="fileChangeEvent($event)"/>-->
+
+<!--<image-cropper-->
+<!--style="max-width: 100px;"-->
+<!--[imageChangedEvent]="imageChangedEvent"-->
+<!--[maintainAspectRatio]="true"-->
+<!--[aspectRatio]="1 / 1"-->
+<!--[resizeToWidth]="750"-->
+<!--format="png"-->
+<!--(imageCropped)="imageCropped($event)"-->
+<!--(imageLoaded)="onImageLoaded()"-->
+<!--(loadImageFailed)="loadImageFailed()"-->
+<!--&gt;</image-cropper>-->
+
+<!--<img [src]="croppedImage" style="max-width: 128px;"/>-->
+<!--</div>-->
+<!--</div>-->
 <!--Buttons-->
 <app-navigation-buttons></app-navigation-buttons>
 
