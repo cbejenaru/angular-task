@@ -1,89 +1,46 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {IqSelect2Item} from './component-wrapper/src/app/iq-select2/iq-select2-item';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {Observable} from 'rxjs/Observable';
-import {Country, DataService} from './data.service';
-import {IqSelect2Component} from './component-wrapper/src/app/iq-select2/iq-select2.component';
-import {map, tap} from 'rxjs/operators';
+import {DataService, Option} from './data.service';
+import {NavigationService} from '../navigation.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-filters',
   templateUrl: './filters.component.html',
   styleUrls: ['./filters.component.css',
-  '../app.component.css'],
+    '../app.component.css'],
   providers: [DataService]
 })
 export class FiltersComponent implements OnInit {
 
   public form: FormGroup;
-  public listItems: (term: string) => Observable<Country[]>;
-  public listItemsMax: (term: string, ids: string[]) => Observable<Country[]>;
-  public getItems: (ids: string[]) => Observable<Country[]>;
-  public entityToIqSelect2Item: (entity: Country) => IqSelect2Item;
+  public listItems: Array<(term: string) => Observable<Option[]>>;
+  public getItems: (ids: string[]) => Observable<Option[]>;
+  public entityToIqSelect2Item: (entity: Option) => IqSelect2Item;
+  filterNames: string[];
   public count: number;
-  @ViewChild('countrySingle') countrySingle: IqSelect2Component;
 
   constructor(private dataService: DataService,
-              private formBuilder: FormBuilder) {
+              private navService: NavigationService,
+              private router: Router) {
   }
 
   ngOnInit() {
-    this.form = this.formBuilder.group({
-      firstname: {
-        value: '',
-        disabled: true
-      },
-      lastname: new FormControl(''),
-      option: new FormControl(''),
-      countrySingle: [{
-        id: '16',
-        name: 'Argentina',
-        code: 'AR',
-        color: '#c1ee5b'
-      }, Validators.required],
-      countryMultiple: null,
-      countryMultipleDisabled: new FormControl({
-        value: [{
-          id: '16',
-          name: 'Argentina',
-          code: 'AR',
-          color: '#c1ee5b'
-        }, {
-          id: '17',
-          name: 'Indonesia',
-          code: 'ID',
-          color: '#19f77a'
-        }],
-        disabled: true
-      }),
-      countrySingleMin0: null,
-      countryMultipleMin0: [[{
-        id: '16',
-        name: 'Argentina',
-        code: 'AR',
-        color: '#c1ee5b'
-      }]],
-      countryMin0Count: null,
-      habilitado: true
+    this.form = new FormGroup({
+      'filters': new FormArray([])
     });
     this.initializeCountryIqSelect2();
+    this.filterNames = this.getFiltersName();
+    this.generateFormControls();
     this.form.valueChanges.subscribe(() => {
-      // console.log('-->' + this.form.controls['countrySingle'].value);
     });
   }
 
   private initializeCountryIqSelect2() {
-    this.listItems = (term: string) => this.dataService.listData(term);
-    this.listItemsMax = (term: string, ids: string[]) => {
-      const selectedCount = ids ? ids.length : 0;
-      return this.dataService
-        .listDataMax(term, 3 + selectedCount)
-        .pipe(
-          tap(response => this.count = response.count),
-          map((response) => response.results)
-        );
-    };
-    this.getItems = (ids: string[]) => this.dataService.getItems(ids);
+    this.listItems = this.dataService.getListMethods();
+    // this.listItems.push((term: string) => this.dataService.listData(term, index));
     this.entityToIqSelect2Item = (entity: any) => {
       return {
         id: entity.id,
@@ -104,10 +61,32 @@ export class FiltersComponent implements OnInit {
   onRemove(item: IqSelect2Item) {
     // console.log('Item removed: ' + item.text);
   }
+  onSubmit() {
+    console.log(this.form);
+  }
 
-  reset() {
+  onBack() {
+    this.router.navigate(['step', --this.navService.currentStep]);
+  }
+
+  onCancel() {
     // console.log('Resetting form');
     this.form.reset();
+  }
+
+  getFiltersName() {
+    const filterNames = [];
+    for (const filter of this.dataService.filters) {
+      filterNames.push(filter.name);
+    }
+    console.log(filterNames);
+    return filterNames;
+  }
+
+  generateFormControls() {
+    for (const filterName of this.filterNames) {
+      (<FormArray>this.form.get('filters')).push(new FormControl(null));
+    }
   }
 
 
