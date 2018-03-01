@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {IqSelect2Item} from './component-wrapper/src/app/iq-select2/iq-select2-item';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup} from '@angular/forms';
 import {Observable} from 'rxjs/Observable';
 import {Addition, DataService} from './data.service';
 import {IqSelect2Component} from './component-wrapper/src/app/iq-select2/iq-select2.component';
@@ -10,7 +10,7 @@ import {map, tap} from 'rxjs/operators';
   selector: 'app-additions-and-prices',
   templateUrl: './additions-and-prices.component.html',
   styleUrls: ['./additions-and-prices.component.css',
-  '../app.component.css'],
+    '../app.component.css'],
   providers: [DataService]
 })
 export class AdditionsAndPricesComponent implements OnInit {
@@ -41,6 +41,23 @@ export class AdditionsAndPricesComponent implements OnInit {
     });
   }
 
+  send(formJson: string) {
+    // console.log(formJson);
+  }
+
+  onSelect(item: IqSelect2Item) {
+    // console.log('Item selected: ' + item.text);
+  }
+
+  onRemove(item: IqSelect2Item) {
+    // console.log('Item removed: ' + item.text);
+  }
+
+  reset() {
+    // console.log('Resetting form');
+    this.form.reset();
+  }
+
   private initializeCountryIqSelect2() {
     this.listItems = (term: string) => this.dataService.listData(term);
     this.listItemsMax = (term: string, ids: string[]) => {
@@ -61,23 +78,6 @@ export class AdditionsAndPricesComponent implements OnInit {
         entity: entity
       };
     };
-  }
-
-  send(formJson: string) {
-    // console.log(formJson);
-  }
-
-  onSelect(item: IqSelect2Item) {
-    // console.log('Item selected: ' + item.text);
-  }
-
-  onRemove(item: IqSelect2Item) {
-    // console.log('Item removed: ' + item.text);
-  }
-
-  reset() {
-    // console.log('Resetting form');
-    this.form.reset();
   }
 
 

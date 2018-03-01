@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Ng2ImgMaxService} from 'ng2-img-max';
 import {Ng2ImgurUploader} from 'ng2-imgur-uploader';
+import {NavigationService} from '../navigation.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-photos',
@@ -29,7 +31,9 @@ export class PhotosComponent implements OnInit {
 
 
   constructor(private imageCompressService: Ng2ImgMaxService,
-              private imgurUploader: Ng2ImgurUploader) {
+              private imgurUploader: Ng2ImgurUploader,
+              private navService: NavigationService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -129,7 +133,7 @@ export class PhotosComponent implements OnInit {
         });
       }
 
-        // this.onRemove('gallery');
+      // this.onRemove('gallery');
 
     }
   }
@@ -181,7 +185,7 @@ export class PhotosComponent implements OnInit {
   }
 
   onGalleryClose(index: number) {
-    this.galleryURLs.splice(index,1);
+    this.galleryURLs.splice(index, 1);
   }
 
   onImageLoaded() {
@@ -190,5 +194,26 @@ export class PhotosComponent implements OnInit {
 
   loadImageFailed() {
 
+  }
+
+  onBack() {
+    this.router.navigate(['step', --this.navService.currentStep]);
+  }
+
+  onCancel() {
+    this.onRemove('miniature');
+    this.onRemove('banner');
+    this.onRemove('gallery');
+    this.galleryURLs = [];
+  }
+
+  onNext() {
+    const photosObject = {
+      miniatureURL: this.miniatureURL,
+      bannerURL: this.bannerURL,
+      galleryURLs: this.galleryURLs
+    };
+    console.log(photosObject);
+    this.router.navigate(['step', ++this.navService.currentStep]);
   }
 }

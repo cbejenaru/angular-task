@@ -159,26 +159,19 @@
   </div>
   <br>
 </div>
-
-<!--<div class="row">-->
-<!--<div class="col-xs-12">-->
-<!--<input type="file" (change)="fileChangeEvent($event)"/>-->
-
-<!--<image-cropper-->
-<!--style="max-width: 100px;"-->
-<!--[imageChangedEvent]="imageChangedEvent"-->
-<!--[maintainAspectRatio]="true"-->
-<!--[aspectRatio]="1 / 1"-->
-<!--[resizeToWidth]="750"-->
-<!--format="png"-->
-<!--(imageCropped)="imageCropped($event)"-->
-<!--(imageLoaded)="onImageLoaded()"-->
-<!--(loadImageFailed)="loadImageFailed()"-->
-<!--&gt;</image-cropper>-->
-
-<!--<img [src]="croppedImage" style="max-width: 128px;"/>-->
-<!--</div>-->
-<!--</div>-->
-<!--Buttons-->
-<app-navigation-buttons></app-navigation-buttons>
+<div class="row">
+  <div class="col-xs-12 col-md-9 col-md-offset-3">
+    <div class="row">
+      <div class="col-xs-4">
+        <button class="btn btn-back btn-block" (click)="onBack()"><p class="btn-text">Back</p></button>
+      </div>
+      <div class="col-xs-4">
+        <button class="btn btn-block" (click)="onCancel()"><p class="btn-text">Cancel</p></button>
+      </div>
+      <div class="col-xs-4">
+        <button class="btn btn-success btn-block" (click)="onNext()"><p class="btn-text">Next</p></button>
+      </div>
+    </div>
+  </div>
+</div>
 

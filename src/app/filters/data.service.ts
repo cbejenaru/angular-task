@@ -16,11 +16,10 @@ export class Filter {
 @Injectable()
 export class DataService implements OnInit {
 
+  filters: Filter[] = new Array();
   private headers: Headers = new Headers({'Content-Type': 'application/json'});
   private options: RequestOptions = new RequestOptions({headers: this.headers});
-
-  filters: Filter[] = new Array();
-    // [
+  // [
   //   {
   //     name: 'First filter',
   //     options: [
@@ -52,7 +51,6 @@ export class DataService implements OnInit {
   //     ]
   //   }];
 
-
   constructor() {
   }
 
@@ -78,22 +76,6 @@ export class DataService implements OnInit {
     return methods;
   }
 
-  // public listData(pattern: string, maxResults?: number): Observable<Option[]> {
-  //   return of(this.filters.options
-  //     .filter((country) => country.name.toUpperCase().indexOf(pattern.toUpperCase()) !== -1)
-  //     .sort(this.sortFunction));
-  // }
-
-  private sortFunction(option1: Option, option2: Option) {
-    if (option1.name < option2.name) {
-      return -1;
-    }
-    if (option1.name > option2.name) {
-      return 1;
-    }
-    return 0;
-  }
-
   generateFilters(filtersNumber: number) {
     const filters: Filter[] = new Array();
     for (let i = 0; i < filtersNumber; i++) {
@@ -102,7 +84,6 @@ export class DataService implements OnInit {
         options: this.generateOptions()
       });
     }
-    console.log(filters);
     return filters;
   }
 
@@ -120,7 +101,6 @@ export class DataService implements OnInit {
   generateOptions() {
     const n = Math.floor(2 + Math.random() * 12);
     const options: Option[] = new Array();
-    console.log('Options:' + n);
     for (let i = 0; i < n; i++) {
       options.push({
         id: i.toString(),
@@ -128,6 +108,16 @@ export class DataService implements OnInit {
       });
     }
     return options;
+  }
+
+  private sortFunction(option1: Option, option2: Option) {
+    if (option1.name < option2.name) {
+      return -1;
+    }
+    if (option1.name > option2.name) {
+      return 1;
+    }
+    return 0;
   }
 
 }

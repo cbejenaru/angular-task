@@ -19,11 +19,12 @@
   display: inline;
 }
 
-.upload-btn{
+.upload-btn {
   color: #30c171;
   cursor: pointer;
   font-weight: normal;
 }
+
 .upload-btn:hover {
   text-decoration: underline;
 }
@@ -69,7 +70,10 @@ a.remove-btn {
 
 .photo-frame-big > div {
   position: absolute;
-  top: 0; bottom: 0; left: 0; right: 0;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   padding: 0px;
   margin: 0px;
   width: 100%;

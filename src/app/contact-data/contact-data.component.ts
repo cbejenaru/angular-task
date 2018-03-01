@@ -1,7 +1,6 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-import {} from '@types/googlemaps';
 
 import Utils from '../shared/utils';
 import {NavigationService} from '../navigation.service';

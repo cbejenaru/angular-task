@@ -1,18 +1,15 @@
 /*.title {*/
-  /*font-family: Roboto;*/
-  /*font-weight: bold;*/
-  /*font-size: 17px;*/
-  /*color: #5d7081;*/
+/*font-family: Roboto;*/
+/*font-weight: bold;*/
+/*font-size: 17px;*/
+/*color: #5d7081;*/
 /*}*/
-
 
 /*.title:before {*/
-  /*content: url('../../assets/images/title.png');*/
+/*content: url('../../assets/images/title.png');*/
 /*}*/
 
-
-
-.check  {
+.check {
   margin-top: 28px;
   margin-bottom: 0px;
 }
