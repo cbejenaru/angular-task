@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {IqSelect2Item} from './component-wrapper/src/app/iq-select2/iq-select2-item';
-import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {FormArray, FormControl, FormGroup} from '@angular/forms';
 import {Observable} from 'rxjs/Observable';
 import {DataService, Option} from './data.service';
 import {NavigationService} from '../navigation.service';
@@ -38,18 +38,6 @@ export class FiltersComponent implements OnInit {
     });
   }
 
-  private initializeCountryIqSelect2() {
-    this.listItems = this.dataService.getListMethods();
-    // this.listItems.push((term: string) => this.dataService.listData(term, index));
-    this.entityToIqSelect2Item = (entity: any) => {
-      return {
-        id: entity.id,
-        text: entity.name,
-        entity: entity
-      };
-    };
-  }
-
   send(formJson: string) {
     // console.log(formJson);
   }
@@ -61,8 +49,10 @@ export class FiltersComponent implements OnInit {
   onRemove(item: IqSelect2Item) {
     // console.log('Item removed: ' + item.text);
   }
-  onSubmit() {
+
+  onNext() {
     console.log(this.form);
+    this.router.navigate(['step', ++this.navService.currentStep]);
   }
 
   onBack() {
@@ -79,7 +69,6 @@ export class FiltersComponent implements OnInit {
     for (const filter of this.dataService.filters) {
       filterNames.push(filter.name);
     }
-    console.log(filterNames);
     return filterNames;
   }
 
@@ -87,6 +76,18 @@ export class FiltersComponent implements OnInit {
     for (const filterName of this.filterNames) {
       (<FormArray>this.form.get('filters')).push(new FormControl(null));
     }
+  }
+
+  private initializeCountryIqSelect2() {
+    this.listItems = this.dataService.getListMethods();
+    // this.listItems.push((term: string) => this.dataService.listData(term, index));
+    this.entityToIqSelect2Item = (entity: any) => {
+      return {
+        id: entity.id,
+        text: entity.name,
+        entity: entity
+      };
+    };
   }
 
 

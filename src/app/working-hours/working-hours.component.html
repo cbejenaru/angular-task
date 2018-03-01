@@ -28,7 +28,7 @@
         <div class="row">
           <div class="col-xs-4 col-xs-offset-3">
             <p class=" validation-advice-text"
-            *ngIf="workingHoursForm.get(day + '.from').errors && workingHoursForm.get(day + '.from').touched">
+               *ngIf="workingHoursForm.get(day + '.from').errors && workingHoursForm.get(day + '.from').touched">
               <span *ngIf="!workingHoursForm.get(day + '.from').disabled && (workingHoursForm.get(day + '.from').errors['required']
               && workingHoursForm.get(day + '.from').touched) ">Obligatoriu</span>
               <span *ngIf="!workingHoursForm.get(day + '.from').disabled && (workingHoursForm.get(day + '.from').errors['pattern']
