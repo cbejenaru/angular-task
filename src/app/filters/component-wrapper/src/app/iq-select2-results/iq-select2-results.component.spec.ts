@@ -2,7 +2,7 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {IqSelect2ResultsComponent} from './iq-select2-results.component';
 
-describe('IqSelect2ResultsComponent', () => {
+describe('IqSelect2IconResultsComponent', () => {
   let component: IqSelect2ResultsComponent;
   let fixture: ComponentFixture<IqSelect2ResultsComponent>;
 

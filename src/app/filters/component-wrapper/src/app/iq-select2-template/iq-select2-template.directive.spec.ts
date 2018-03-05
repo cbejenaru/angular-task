@@ -9,7 +9,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {IqSelect2Component} from '../iq-select2/iq-select2.component';
 import {IqSelect2TemplateDirective} from './iq-select2-template.directive';
 
-describe('IqSelect2TemplateDirective', () => {
+describe('IqSelect2IconTemplateDirective', () => {
   let component: IqSelect2Component;
   let parentFixture: ComponentFixture<TestHostComponent>;
 

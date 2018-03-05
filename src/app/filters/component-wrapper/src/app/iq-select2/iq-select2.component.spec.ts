@@ -10,7 +10,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {empty} from 'rxjs/observable/empty';
 import {of} from 'rxjs/observable/of';
 
-describe('IqSelect2Component', () => {
+describe('IqSelect2IconComponent', () => {
   let component: IqSelect2Component;
   let fixture: ComponentFixture<IqSelect2Component>;
 

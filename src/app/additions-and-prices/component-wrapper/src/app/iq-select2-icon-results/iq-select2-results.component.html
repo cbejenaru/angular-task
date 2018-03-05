@@ -7,7 +7,15 @@
          (mouseenter)="onHovering($event)">
       <ng-container [ngTemplateOutlet]="templateRef"
                     [ngTemplateOutletContext]="{$item:item, $entity: item.entity, $id:item.id, $index:i}"></ng-container>
-      <ng-container *ngIf="!templateRef">{{item.text}}</ng-container>
+      <ng-container *ngIf="!templateRef">
+        <!--<img src="{{ item.imagePath }}">{{item.text}}-->
+        <div class="iconContainer">
+          <img class="listItemIcon" src="{{ item.imagePath }}" alt="icon">
+        </div>
+        <span class="listItemText">
+          {{item.text}}
+        </span>
+      </ng-container>
     </div>
   </div>
 </div>

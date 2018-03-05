@@ -1,20 +1,20 @@
 /* tslint:disable:no-unused-variable */
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-import {IqSelect2ResultsComponent} from './iq-select2-results.component';
+import {IqSelect2IconResultsComponent} from './iq-select2-results.component';
 
-describe('IqSelect2ResultsComponent', () => {
-  let component: IqSelect2ResultsComponent;
-  let fixture: ComponentFixture<IqSelect2ResultsComponent>;
+describe('IqSelect2IconResultsComponent', () => {
+  let component: IqSelect2IconResultsComponent;
+  let fixture: ComponentFixture<IqSelect2IconResultsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [IqSelect2ResultsComponent]
+      declarations: [IqSelect2IconResultsComponent]
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(IqSelect2ResultsComponent);
+    fixture = TestBed.createComponent(IqSelect2IconResultsComponent);
     component = fixture.componentInstance;
     component.items = [
       {

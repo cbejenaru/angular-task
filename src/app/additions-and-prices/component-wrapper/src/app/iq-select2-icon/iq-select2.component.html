@@ -5,13 +5,19 @@
       [class.search-focused]="searchFocused">
     <li *ngFor="let item of selectedItems" class="select2-selected" [class.label]="multiple"
         [class.label-info]="multiple">
-            <span class="selectedItemText">
-              test
-              {{item.text}}
-            </span>
-      <a class="select2-selection-remove" (click)="removeItem(item)" *ngIf="!disabled">
-        <i [class]="deleteIcon" [class.text-info]="!multiple"></i>
-      </a>
+      <div class="selectedItem">
+        <div class="selectedIcon">
+          <img src="{{ item.imagePath }}" alt="icon" style="height: 40px;">
+        </div>
+        <div class="selectedItemText">
+          {{item.text}}
+        </div>
+        <div class="selectedItemRemove">
+          <a class="select2-selection-remove" (click)="removeItem(item)" *ngIf="!disabled">
+            <i [class]="deleteIcon" [class.text-info]="!multiple"></i>
+          </a>
+        </div>
+      </div>
     </li>
     <li class="select2-input">
       <input #termInput type="text"
@@ -37,9 +43,9 @@
     <span class="results-msg no-results-msg" *ngIf="searchFocused && listData && listData.length === 0">
             {{messages && messages.noResultsAvailableMsg ? messages.noResultsAvailableMsg : NO_RESULTS_MSG}}
         </span>
-    <iq-select2-results #results [selectedItems]="selectedItems" [items]="listData"
-                        (itemSelectedEvent)="onItemSelected($event);"
-                        [templateRef]="templateRef"
-                        [searchFocused]="searchFocused"></iq-select2-results>
+    <iq-select2-icon-results #results [selectedItems]="selectedItems" [items]="listData"
+                             (itemSelectedEvent)="onItemSelected($event);"
+                             [templateRef]="templateRef"
+                             [searchFocused]="searchFocused"></iq-select2-icon-results>
   </div>
 </div>
