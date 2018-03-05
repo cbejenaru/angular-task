@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, EventEmitter, forwardRef, Input, Output, TemplateRef, ViewChild} from '@angular/core';
 import {IqSelect2Item} from './iq-select2-item';
-import {IqSelect2ResultsComponent} from '../iq-select2-results/iq-select2-results.component';
+import {IqSelect2IconResultsComponent} from '../iq-select2-icon-results/iq-select2-results.component';
 import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {Messages} from './messages';
 import {Observable} from 'rxjs/Observable';
@@ -14,19 +14,19 @@ const KEY_CODE_TAB = 9;
 const KEY_CODE_DELETE = 8;
 const VALUE_ACCESSOR = {
   provide: NG_VALUE_ACCESSOR,
-  useExisting: forwardRef(() => IqSelect2Component),
+  useExisting: forwardRef(() => IqSelect2IconComponent),
   multi: true
 };
 const noop = () => {
 };
 
 @Component({
-  selector: 'iq-select2',
+  selector: 'iq-select2-icon',
   templateUrl: './iq-select2.component.html',
   styleUrls: ['./iq-select2.component.css'],
   providers: [VALUE_ACCESSOR]
 })
-export class IqSelect2Component implements AfterViewInit, ControlValueAccessor {
+export class IqSelect2IconComponent implements AfterViewInit, ControlValueAccessor {
 
   MORE_RESULTS_MSG = 'Showing ' + Messages.PARTIAL_COUNT_VAR + ' of ' + Messages.TOTAL_COUNT_VAR + ' results. Refine your search to show more results.';
   NO_RESULTS_MSG = 'No results available';
@@ -35,6 +35,7 @@ export class IqSelect2Component implements AfterViewInit, ControlValueAccessor {
     noResultsAvailableMsg: this.NO_RESULTS_MSG
   };
   @Input() dataSourceProvider: (term: string, selected?: any[]) => Observable<any[]>;
+  @Input() dataList;
   @Input() selectedProvider: (ids: string[]) => Observable<any[]>;
   @Input() iqSelect2ItemAdapter: (entity: any) => IqSelect2Item;
   @Input() referenceMode: 'id' | 'entity' = 'id';
@@ -50,7 +51,7 @@ export class IqSelect2Component implements AfterViewInit, ControlValueAccessor {
   @Input() clientMode = false;
   @Output() onSelect: EventEmitter<IqSelect2Item> = new EventEmitter<IqSelect2Item>();
   @Output() onRemove: EventEmitter<IqSelect2Item> = new EventEmitter<IqSelect2Item>();
-  @ViewChild('results') results: IqSelect2ResultsComponent;
+  @ViewChild('results') results: IqSelect2IconResultsComponent;
   templateRef: TemplateRef<any>;
   term = new FormControl();
   resultsVisible = false;
@@ -278,9 +279,15 @@ export class IqSelect2Component implements AfterViewInit, ControlValueAccessor {
   }
 
   private fetchData(term: string): Observable<IqSelect2Item[]> {
-    return this
-      .dataSourceProvider(term, this.buildValue())
-      .pipe(map((items: any[]) => this.adaptItems(items)));
+    if (this.dataList !== undefined) {
+      return of(this.dataList)
+        .pipe(map((items: any[]) => this.adaptItems(items)));
+    } else {
+      return this
+        .dataSourceProvider(term, this.buildValue())
+        .pipe(map((items: any[]) => this.adaptItems(items)));
+    }
+
   }
 
   private adaptItems(items: any[]): IqSelect2Item[] {

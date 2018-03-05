@@ -1,21 +1,21 @@
 /* tslint:disable:no-unused-variable */
 import {async, ComponentFixture, fakeAsync, inject, TestBed, tick} from '@angular/core/testing';
-import {IqSelect2ResultsComponent} from '../iq-select2-results/iq-select2-results.component';
+import {IqSelect2IconResultsComponent} from '../iq-select2-icon-results/iq-select2-results.component';
 import {FormBuilder, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {DataService} from '../../../../data.service';
 import {BaseRequestOptions, Http} from '@angular/http';
 import {MockBackend} from '@angular/http/testing';
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {IqSelect2Component} from '../iq-select2/iq-select2.component';
-import {IqSelect2TemplateDirective} from './iq-select2-template.directive';
+import {IqSelect2IconComponent} from '../iq-select2-icon/iq-select2icon.component';
+import {IqSelect2IconTemplateDirective} from './iq-select2-template.directive';
 
-describe('IqSelect2TemplateDirective', () => {
-  let component: IqSelect2Component;
+describe('IqSelect2IconTemplateDirective', () => {
+  let component: IqSelect2IconComponent;
   let parentFixture: ComponentFixture<TestHostComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [IqSelect2Component, IqSelect2TemplateDirective, IqSelect2ResultsComponent, TestHostComponent],
+      declarations: [IqSelect2IconComponent, IqSelect2IconTemplateDirective, IqSelect2IconResultsComponent, TestHostComponent],
       imports: [ReactiveFormsModule],
       providers: [
         DataService,
@@ -79,8 +79,8 @@ describe('IqSelect2TemplateDirective', () => {
 })
 class TestHostComponent implements OnInit {
 
-  @ViewChild(IqSelect2Component)
-  childComponent: IqSelect2Component;
+  @ViewChild(IqSelect2IconComponent)
+  childComponent: IqSelect2IconComponent;
   fg: FormGroup;
 
   constructor(private formBuilder: FormBuilder) {

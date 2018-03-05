@@ -21,8 +21,8 @@
 }
 
 .select2-selected {
+  height: 60px;
   background: #f9f9f9;
-  /*background: red;*/
   border: 1px solid #b6c2cd;
   margin: 2px;
   float: left;
@@ -100,11 +100,6 @@
   display: none;
 }
 
-/*Text in the box*/
-.selectedItemText {
-  color: #757575;
-}
-
 .simple-selection.search-focused input.hideable {
   opacity: 1;
 }
@@ -154,4 +149,39 @@
 
 .requestInProgress {
   background: lightgray;
+}
+
+/*Text in the box*/
+.selectedItemText {
+  color: #757575;
+  font-family: Roboto;
+  font-weight: normal;
+  /*width: 55%;*/
+  white-space: normal;
+  text-align: left;
+  line-height: 15px;
+  vertical-align: middle;
+}
+
+.selectedItem {
+  /*width: 150px;*/
+  /*width: 33%;*/
+  margin-top: 5px;
+  /*position: relative;*/
+  text-align: left;
+}
+
+.selectedIcon {
+  width: 60px;
+  text-align: center;
+  /*position: absolute;*/
+}
+
+.selectedItemRemove {
+  /*position: absolute;*/
+
+}
+
+.selectedItem div {
+  display: inline-block;
 }

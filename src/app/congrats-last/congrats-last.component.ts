@@ -17,12 +17,11 @@ export class CongratsLastComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSned() {
+  onSend() {
 
   }
 
   onBack() {
-    this.navServ.currentStep--;
-    this.router.navigate(['/step', this.navServ.currentStep]);
+    this.router.navigate(['/step', --this.navServ.currentStep]);
   }
 }

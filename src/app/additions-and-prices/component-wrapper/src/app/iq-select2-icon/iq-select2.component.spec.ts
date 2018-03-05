@@ -1,8 +1,8 @@
 /* tslint:disable:no-unused-variable */
 import {async, ComponentFixture, fakeAsync, inject, TestBed, tick} from '@angular/core/testing';
-import {IqSelect2ResultsComponent} from '../iq-select2-results/iq-select2-results.component';
+import {IqSelect2IconResultsComponent} from '../iq-select2-icon-results/iq-select2-results.component';
 import {FormBuilder, FormGroup, ReactiveFormsModule} from '@angular/forms';
-import {IqSelect2Component} from './iq-select2.component';
+import {IqSelect2IconComponent} from './iq-select2icon.component';
 import {DataService} from '../../../../data.service';
 import {BaseRequestOptions, Http} from '@angular/http';
 import {MockBackend} from '@angular/http/testing';
@@ -10,13 +10,13 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {empty} from 'rxjs/observable/empty';
 import {of} from 'rxjs/observable/of';
 
-describe('IqSelect2Component', () => {
-  let component: IqSelect2Component;
-  let fixture: ComponentFixture<IqSelect2Component>;
+describe('IqSelect2IconComponent', () => {
+  let component: IqSelect2IconComponent;
+  let fixture: ComponentFixture<IqSelect2IconComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [IqSelect2Component, IqSelect2ResultsComponent, TestHostComponent],
+      declarations: [IqSelect2IconComponent, IqSelect2IconResultsComponent, TestHostComponent],
       imports: [ReactiveFormsModule],
       providers: [
         DataService,
@@ -44,7 +44,7 @@ describe('IqSelect2Component', () => {
   };
 
   beforeEach(inject([DataService], (service: DataService) => {
-    fixture = TestBed.createComponent(IqSelect2Component);
+    fixture = TestBed.createComponent(IqSelect2IconComponent);
     component = fixture.componentInstance;
     component.dataSourceProvider = (term: string) => service.listData(term);
     component.iqSelect2ItemAdapter = adapter();
@@ -970,8 +970,8 @@ describe('IqSelect2Component', () => {
 })
 class TestHostComponent implements OnInit {
 
-  @ViewChild(IqSelect2Component)
-  childComponent: IqSelect2Component;
+  @ViewChild(IqSelect2IconComponent)
+  childComponent: IqSelect2IconComponent;
   fg: FormGroup;
 
   constructor(private formBuilder: FormBuilder) {

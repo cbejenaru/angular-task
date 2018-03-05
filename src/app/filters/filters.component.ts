@@ -31,7 +31,7 @@ export class FiltersComponent implements OnInit {
     this.form = new FormGroup({
       'filters': new FormArray([])
     });
-    this.initializeCountryIqSelect2();
+    this.initializeIqSelect2();
     this.filterNames = this.getFiltersName();
     this.generateFormControls();
     this.form.valueChanges.subscribe(() => {
@@ -78,7 +78,7 @@ export class FiltersComponent implements OnInit {
     }
   }
 
-  private initializeCountryIqSelect2() {
+  private initializeIqSelect2() {
     this.listItems = this.dataService.getListMethods();
     // this.listItems.push((term: string) => this.dataService.listData(term, index));
     this.entityToIqSelect2Item = (entity: any) => {
@@ -89,8 +89,6 @@ export class FiltersComponent implements OnInit {
       };
     };
   }
-
-
 }
 
 

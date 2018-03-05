@@ -31,3 +31,25 @@
   background: gray;
   color: black;
 }
+
+.listItemText {
+  color: #757575;
+  padding-top: 8px;
+  font-family: Roboto;
+  font-weight: normal;
+}
+
+.listItemIcon {
+  height: 40px;
+  display: block;
+  margin: auto;
+}
+
+.iconContainer {
+  width: 70px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+
+

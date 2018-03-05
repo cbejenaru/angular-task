@@ -1,5 +1,5 @@
 export class NavigationService {
-  currentStep = 4;
+  currentStep = 1;
 
   nextStep() {
     this.currentStep++;

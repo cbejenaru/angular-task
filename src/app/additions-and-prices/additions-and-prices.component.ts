@@ -1,10 +1,11 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {IqSelect2Item} from './component-wrapper/src/app/iq-select2/iq-select2-item';
+import {Component, OnInit} from '@angular/core';
+import {IqSelect2Item} from './component-wrapper/src/app/iq-select2-icon/iq-select2-item';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {Observable} from 'rxjs/Observable';
 import {Addition, DataService} from './data.service';
-import {IqSelect2Component} from './component-wrapper/src/app/iq-select2/iq-select2.component';
 import {map, tap} from 'rxjs/operators';
+import {NavigationService} from '../navigation.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-additions-and-prices',
@@ -19,46 +20,60 @@ export class AdditionsAndPricesComponent implements OnInit {
   public listItems: (term: string) => Observable<Addition[]>;
   public listItemsMax: (term: string, ids: string[]) => Observable<Addition[]>;
   public getItems: (ids: string[]) => Observable<Addition[]>;
+  public reservationListItemsMax: (term: string, ids: string[]) => Observable<Addition[]>;
+  public reservationListItems: (term: string) => Observable<Addition[]>;
+  public getReservationItems: (ids: string[]) => Observable<Addition[]>;
   public entityToIqSelect2Item: (entity: Addition) => IqSelect2Item;
   public count: number;
-  @ViewChild('countrySingle') countrySingle: IqSelect2Component;
+
+  public reservationDataList = [];
 
   constructor(private dataService: DataService,
-              private formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder,
+              private navService: NavigationService,
+              private router: Router) {
   }
 
   ngOnInit() {
     this.form = this.formBuilder.group({
-      countryMultipleMin0: [[{
-        id: '1',
-        name: 'Bussiness lunches',
-        imagePath: 'src/assets/images/page6/bussines-lunch-icon.png'
-      }]]
+      additionalElements: [[]],
+      additionalElementsReservation: [[]]
     });
-    this.initializeCountryIqSelect2();
+    this.initializeAdditonIqSelect2();
+    this.initializeAdditonReservationIqSelect2();
     this.form.valueChanges.subscribe(() => {
-      // console.log('-->' + this.form.controls['countrySingle'].value);
     });
   }
 
   send(formJson: string) {
-    // console.log(formJson);
   }
 
   onSelect(item: IqSelect2Item) {
-    // console.log('Item selected: ' + item.text);
+    this.reservationDataList = this.form.get('additionalElements').value.slice();
   }
 
   onRemove(item: IqSelect2Item) {
-    // console.log('Item removed: ' + item.text);
+    this.reservationDataList = this.form.get('additionalElements').value.slice();
   }
 
   reset() {
-    // console.log('Resetting form');
     this.form.reset();
   }
 
-  private initializeCountryIqSelect2() {
+  onNext() {
+    console.log(this.form);
+    this.router.navigate(['step', ++this.navService.currentStep]);
+  }
+
+  onCancel() {
+    this.form.reset();
+  }
+
+  onBack() {
+    this.router.navigate(['step', --this.navService.currentStep]);
+  }
+
+  private initializeAdditonIqSelect2() {
     this.listItems = (term: string) => this.dataService.listData(term);
     this.listItemsMax = (term: string, ids: string[]) => {
       const selectedCount = ids ? ids.length : 0;
@@ -80,5 +95,26 @@ export class AdditionsAndPricesComponent implements OnInit {
     };
   }
 
+  private initializeAdditonReservationIqSelect2() {
+    this.reservationListItems = (term) => this.dataService.listReservationData(term);
+    this.reservationListItemsMax = (term: string, ids: string[]) => {
+      const selectedCount = ids ? ids.length : 0;
+      return this.dataService
+        .listReservationDataMax(term, 3 + selectedCount)
+        .pipe(
+          tap(response => this.count = response.count),
+          map((response) => response.results)
+        );
+    };
+    this.getReservationItems = (ids: string[]) => this.dataService.getReservationItems(ids);
+    this.entityToIqSelect2Item = (entity: any) => {
+      return {
+        id: entity.id,
+        text: entity.name,
+        imagePath: entity.imagePath,
+        entity: entity
+      };
+    };
+  }
 
 }

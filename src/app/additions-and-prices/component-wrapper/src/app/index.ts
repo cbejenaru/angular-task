@@ -1,2 +1,2 @@
-export * from './iq-select2.module';
-export * from './iq-select2/iq-select2-item';
+export * from './iq-select2-icon.module';
+export * from './iq-select2-icon/iq-select2-item';
