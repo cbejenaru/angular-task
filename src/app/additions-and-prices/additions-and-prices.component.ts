@@ -43,6 +43,15 @@ export class AdditionsAndPricesComponent implements OnInit {
     this.initializeAdditonReservationIqSelect2();
     this.form.valueChanges.subscribe(() => {
     });
+
+    if (localStorage.getItem('step6') !== null) {
+      let stored = JSON.parse(localStorage.getItem('step6'));
+      this.form.get('additionalElements').setValue(stored.additionalElements);
+      if (stored.additionalElements !== []) {
+        this.form.get('additionalElementsReservation').setValue(stored.additionalElementsReservation);
+        this.reservationDataList = stored.additionalElements;
+      }
+    }
   }
 
   send(formJson: string) {
@@ -61,7 +70,7 @@ export class AdditionsAndPricesComponent implements OnInit {
   }
 
   onNext() {
-    console.log(this.form);
+    localStorage.setItem('step6', JSON.stringify(this.form.value));
     this.router.navigate(['step', ++this.navService.currentStep]);
   }
 

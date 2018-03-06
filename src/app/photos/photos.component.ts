@@ -37,6 +37,18 @@ export class PhotosComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (localStorage.getItem('step4') !== null) {
+      let stored = JSON.parse(localStorage.getItem('step4'));
+      if (stored.miniatureURL !== '') {
+        this.miniatureURL = stored.miniatureURL;
+        this.miniatureSaved = true;
+      }
+      if (stored.bannerURL !== '') {
+        this.bannerURL = stored.bannerURL;
+        this.bannerSaved = true;
+      }
+      this.galleryURLs = stored.galleryURLs;
+    }
   }
 
   onRemove(type: string) {
@@ -213,7 +225,7 @@ export class PhotosComponent implements OnInit {
       bannerURL: this.bannerURL,
       galleryURLs: this.galleryURLs
     };
-    console.log(photosObject);
+    localStorage.setItem('step4', JSON.stringify(photosObject));
     this.router.navigate(['step', ++this.navService.currentStep]);
   }
 }
