@@ -60,12 +60,26 @@ export class WorkingHoursComponent implements OnInit {
         'mode': new FormControl('open')
       }),
     });
+
+    if (localStorage.getItem('step2') !== null) {
+      const stored = JSON.parse(localStorage.getItem('step2'));
+      this.days.forEach((day: string) => {
+        this.workingHoursForm.get(day + '.mode').setValue(stored[day].mode);
+        if (stored[day].mode === 'open') {
+          this.workingHoursForm.get(day + '.from').setValue(stored[day].from);
+          this.workingHoursForm.get(day + '.to').setValue(stored[day].to);
+        } else {
+          this.workingHoursForm.get(day + '.from').disable();
+          this.workingHoursForm.get(day + '.to').disable();
+        }
+      });
+    }
   }
 
   onNext() {
     if (this.workingHoursForm.valid) {
       this.router.navigate(['step', ++this.navService.currentStep]);
-      console.log(this.workingHoursForm);
+      localStorage.setItem('step2', JSON.stringify(this.workingHoursForm.value));
     } else {
       for (const day of this.days) {
         Utils.markFormGroupTouched(<FormGroup>this.workingHoursForm.get(day));

@@ -18,7 +18,15 @@ export class CongratsLastComponent implements OnInit {
   }
 
   onSend() {
-
+    let dataToSend = {
+      step1: JSON.parse(localStorage.getItem('step1')),
+      step2: JSON.parse(localStorage.getItem('step2')),
+      step3: JSON.parse(localStorage.getItem('step3')),
+      step4: JSON.parse(localStorage.getItem('step4')),
+      step5: JSON.parse(localStorage.getItem('step5')),
+      step6: JSON.parse(localStorage.getItem('step6')),
+    };
+    console.log(JSON.stringify(dataToSend));
   }
 
   onBack() {

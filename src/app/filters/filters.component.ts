@@ -33,9 +33,16 @@ export class FiltersComponent implements OnInit {
     });
     this.initializeIqSelect2();
     this.filterNames = this.getFiltersName();
-    this.generateFormControls();
-    this.form.valueChanges.subscribe(() => {
-    });
+    if (localStorage.getItem('step5') !== null) {
+      let stored = JSON.parse(localStorage.getItem('step5'));
+      this.filterNames = [];
+      stored.forEach((element) => {
+        (<FormArray>this.form.get('filters')).controls.push(new FormControl(element.selectedOptions));
+        this.filterNames.push(element.filterName);
+      });
+    } else {
+      this.generateFormControls();
+    }
   }
 
   send(formJson: string) {
@@ -51,7 +58,18 @@ export class FiltersComponent implements OnInit {
   }
 
   onNext() {
-    console.log(this.form);
+    let filters = [];
+    let i = 0;
+    this.filterNames.forEach((element) => {
+      filters.push(
+        {
+          filterName: element,
+          selectedOptions: (<FormArray>this.form.get('filters')).get(i.toString()).value
+        }
+      );
+      i++;
+    });
+    localStorage.setItem('step5', JSON.stringify(filters));
     this.router.navigate(['step', ++this.navService.currentStep]);
   }
 

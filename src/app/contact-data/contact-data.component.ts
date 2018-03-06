@@ -2,7 +2,6 @@ import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {} from '@types/googlemaps';
-
 import Utils from '../shared/utils';
 import {NavigationService} from '../navigation.service';
 
@@ -112,11 +111,25 @@ export class ContactDataComponent implements OnInit {
       }
     });
 
+    if (localStorage.getItem('step3') !== null) {
+      let stored = JSON.parse(localStorage.getItem('step3'));
+      Object.keys(this.contactDataForm.controls).forEach(
+        key => {
+          this.contactDataForm.get(key).setValue(stored['form'][key]);
+        }
+      );
+      this.marker.setPosition(stored['LatLng']);
+      this.map.setCenter(stored['LatLng']);
+    }
   }
 
   onNext() {
     if (this.contactDataForm.valid) {
-      console.log({form: this.contactDataForm, latLng: this.marker.getPosition().toString()});
+      let data = {
+        form: this.contactDataForm.value,
+        LatLng: this.marker.getPosition()
+      };
+      localStorage.setItem('step3', JSON.stringify(data));
       this.router.navigate(['step', ++this.navService.currentStep]);
     } else {
       Utils.markFormGroupTouched(<FormGroup>this.contactDataForm);

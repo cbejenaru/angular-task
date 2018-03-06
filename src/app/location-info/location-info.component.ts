@@ -28,12 +28,23 @@ export class LocationInfoComponent implements OnInit {
       averagePrice: new FormControl(null, Validators.required),
       descriptionRu: new FormControl(null, [Validators.required, Validators.maxLength(250)])
     });
+    if (localStorage.getItem('step1') !== null) {
+      const stored = JSON.parse(localStorage.getItem('step1'));
+      this.locationInfoForm.get('comercialName').setValue(stored.comercialName);
+      this.locationInfoForm.get('category').setValue(stored.category);
+      this.locationInfoForm.get('descriptionRo').setValue(stored.descriptionRo);
+      this.locationInfoForm.get('discount').setValue(stored.discount);
+      this.locationInfoForm.get('reservation').setValue(stored.reservation);
+      this.locationInfoForm.get('averagePrice').setValue(stored.averagePrice);
+      this.locationInfoForm.get('descriptionRu').setValue(stored.descriptionRu);
+    }
+
   }
 
   onNext() {
     if (this.locationInfoForm.valid) {
       this.router.navigate(['step', ++this.navService.currentStep]);
-      console.log(this.locationInfoForm);
+      localStorage.setItem('step1', JSON.stringify(this.locationInfoForm.value));
     } else {
       Utils.markFormGroupTouched(this.locationInfoForm);
     }
