@@ -42,10 +42,12 @@ export class PhotosComponent implements OnInit {
       if (stored.miniatureURL !== '') {
         this.miniatureURL = stored.miniatureURL;
         this.miniatureSaved = true;
+        this.miniatureImageLoaded = true;
       }
       if (stored.bannerURL !== '') {
         this.bannerURL = stored.bannerURL;
         this.bannerSaved = true;
+        this.bannerImageLoaded = true;
       }
       this.galleryURLs = stored.galleryURLs;
     }

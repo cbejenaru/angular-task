@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-xs-12">
-    <p class="title">Working hours</p>
+    <p class="title">{{ 'workingHours.title' | translate }}</p>
   </div>
 </div>
 <!--From-To-->
@@ -8,10 +8,10 @@
   <div class="col-lg-6 col-xs-12">
     <div class="row">
       <div class="col-xs-5 col-xs-offset-3">
-        <p>De la</p>
+        <p>{{ 'workingHours.from' | translate }}</p>
       </div>
       <div class="col-xs-4">
-        <p>Pana la</p>
+        <p>{{ 'workingHours.to' | translate }}</p>
       </div>
     </div>
   </div>
@@ -30,18 +30,18 @@
             <p class=" validation-advice-text"
                *ngIf="workingHoursForm.get(day + '.from').errors && workingHoursForm.get(day + '.from').touched">
               <span *ngIf="!workingHoursForm.get(day + '.from').disabled && (workingHoursForm.get(day + '.from').errors['required']
-              && workingHoursForm.get(day + '.from').touched) ">Obligatoriu</span>
+              && workingHoursForm.get(day + '.from').touched) ">{{ 'advices.required' | translate }}</span>
               <span *ngIf="!workingHoursForm.get(day + '.from').disabled && (workingHoursForm.get(day + '.from').errors['pattern']
-              && workingHoursForm.get(day + '.from').touched)">Format hh:mm</span>
+              && workingHoursForm.get(day + '.from').touched)">{{ 'advices.format' | translate }} hh:mm</span>
             </p>
           </div>
           <div class="col-xs-4 col-xs-offset-1">
             <p class="validation-advice-text"
                *ngIf="workingHoursForm.get(day + '.to').errors && workingHoursForm.get(day + '.to').touched">
               <span *ngIf="!workingHoursForm.get(day + '.to').disabled && (workingHoursForm.get(day + '.to').errors['required']
-              && workingHoursForm.get(day + '.to').touched)">Obligatoriu</span>
+              && workingHoursForm.get(day + '.to').touched)">{{ 'advices.required' | translate }}</span>
               <span *ngIf="!workingHoursForm.get(day + '.to').disabled && (workingHoursForm.get(day + '.to').errors['pattern']
-              && workingHoursForm.get(day + '.to').touched)">Format hh:mm</span>
+              && workingHoursForm.get(day + '.to').touched)">{{ 'advices.format' | translate }} hh:mm</span>
             </p>
           </div>
         </div>
@@ -51,11 +51,9 @@
       <div class="col-lg-6 col-xs-12 line">
         <div class="row">
           <div class="col-xs-3">
-            <p class="day">{{ day | titlecase }}:</p>
+            <p class="day">{{ 'workingHours.' + day | translate }}</p>
           </div>
           <div class="col-xs-4">
-            <!--<span class="validation-advice" *ngIf="(workingHoursForm.get(day + '.from').errors['required']-->
-            <!--&& workingHoursForm.get(day + '.from').touched)">Obligatoriu</span>-->
             <input
               class="form-control"
               formControlName="from">
@@ -75,17 +73,17 @@
           <label class="btn btn-default"
                  [ngClass]="workingHoursForm.get( day + '.mode').value === 'open' ? 'btn-success active' : '' "
                  (click)="enableInputs(day)">
-            <input type="radio" value="open" autocomplete="off" formControlName="mode"> Open
+            <input type="radio" value="open" autocomplete="off" formControlName="mode">{{ 'workingHours.open' | translate }}
           </label>
           <label class="btn btn-default"
                  [ngClass]="workingHoursForm.get( day + '.mode').value === 'closed' ? 'btn-danger active' : '' "
                  (click)="cleanAndDisableInputs(day)">
-            <input type="radio" value="closed" autocomplete="off" formControlName="mode"> Closed
+            <input type="radio" value="closed" autocomplete="off" formControlName="mode">{{ 'workingHours.closed' | translate }}
           </label>
           <label class="btn btn-default"
                  [ngClass]="workingHoursForm.get( day + '.mode').value === '24h' ? 'btn-info active' : '' "
                  (click)="cleanAndDisableInputs(day)">
-            <input type="radio" value="24h" autocomplete="off" formControlName="mode"> 24/24
+            <input type="radio" value="24h" autocomplete="off" formControlName="mode">24/24
           </label>
         </div>
       </div>
@@ -95,81 +93,15 @@
     <div class="col-xs-12 col-md-9 col-md-offset-3">
       <div class="row">
         <div class="col-xs-4">
-          <button class="btn btn-back btn-block" type="button" (click)="onBack()"><p class="btn-text">Back</p></button>
+          <button class="btn btn-back btn-block" type="button" (click)="onBack()"><p class="btn-text">{{ 'buttons.back' | translate}}</p></button>
         </div>
         <div class="col-xs-4">
-          <button class="btn btn-block" type="button" (click)="onCancel()"><p class="btn-text">Cancel</p></button>
+          <button class="btn btn-block" type="button" (click)="onCancel()"><p class="btn-text">{{ 'buttons.cancel' | translate }}</p></button>
         </div>
         <div class="col-xs-4">
-          <button class="btn btn-success btn-block" type="submit"><p class="btn-text">Next</p></button>
+          <button class="btn btn-success btn-block" type="submit"><p class="btn-text">{{ 'buttons.next' | translate }}</p></button>
         </div>
       </div>
     </div>
   </div>
 </form>
-<!--&lt;!&ndash;Marti:&ndash;&gt;-->
-<!--<div class="row">-->
-<!--<div class="col-md-6 col-sm-12 line">-->
-<!--<div class="row">-->
-<!--<div class="col-xs-3">-->
-<!--<p class="day">Marti:</p>-->
-<!--</div>-->
-<!--<div class="col-xs-4">-->
-<!--<input class="form-control">-->
-<!--</div>-->
-<!--<div class="col-xs-1 arrow">-->
-<!--<img src="../../assets/images/arrow.png" alt="-">-->
-<!--</div>-->
-<!--<div class="col-xs-4">-->
-<!--<input class="form-control">-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--<div class="col-md-6 col-sm-12 line">-->
-<!--<div class="btn-group btn-group-justified" data-toggle="buttons">-->
-<!--<label class="btn btn-default">-->
-<!--<input type="radio" name="options" autocomplete="off">Open-->
-<!--</label>-->
-<!--<label class="btn btn-danger">-->
-<!--<input type="radio" name="options" autocomplete="off" checked> Closed-->
-<!--</label>-->
-<!--<label class="btn btn-default">-->
-<!--<input type="radio" name="options" autocomplete="off"> 24/24-->
-<!--</label>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--&lt;!&ndash;Miercuri:&ndash;&gt;-->
-<!--<div class="row">-->
-<!--<div class="col-md-6 col-sm-12 line">-->
-<!--<div class="row">-->
-<!--<div class="col-xs-3">-->
-<!--<p class="day">Miercuri:</p>-->
-<!--</div>-->
-<!--<div class="col-xs-4">-->
-<!--<input class="form-control">-->
-<!--</div>-->
-<!--<div class="col-xs-1 arrow">-->
-<!--<img src="../../assets/images/arrow.png" alt="-">-->
-<!--</div>-->
-<!--<div class="col-xs-4">-->
-<!--<input class="form-control">-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--<div class="col-md-6 col-sm-12 line">-->
-<!--<div class="btn-group btn-group-justified" data-toggle="buttons">-->
-<!--<label class="btn btn-default">-->
-<!--<input type="radio" name="options" autocomplete="off">Open-->
-<!--</label>-->
-<!--<label class="btn btn-default">-->
-<!--<input type="radio" name="options" autocomplete="off"> Closed-->
-<!--</label>-->
-<!--<label class="btn btn-info">-->
-<!--<input type="radio" name="options" autocomplete="off" checked> 24/24-->
-<!--</label>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--Bottom buttons-->
-<!--<app-navigation-buttons></app-navigation-buttons>-->

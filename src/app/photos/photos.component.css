@@ -9,10 +9,11 @@
   margin-right: 5px;
 }
 
-.upload.name {
+.name {
   font-weight: 500;
   font-size: 15px;
   color: #5d7081;
+  text-transform: uppercase;
 }
 
 .upload p {

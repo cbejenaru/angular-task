@@ -1,0 +1,77 @@
+{
+  "header": {
+    "logOut": "ieșire"
+  },
+  "step" : "Pasul",
+  "buttons" : {
+    "back" : "Înapoi",
+    "cancel" : "Anlează",
+    "next" : "Următorul",
+    "submit" : "Trimite"
+  },
+  "advices": {
+    "required": "Obligatoriu",
+    "max25": "Maxim 25 caractere",
+    "max250": "Maxim 250 caractere",
+    "format" : "Format"
+  },
+  "locationInfo": {
+    "title" : "Informații despre locație",
+    "company": "Denumirea juridică",
+    "comercialName": "Denumirea comercială",
+    "discount": "Reducere",
+    "reservation": "Activarea bronării",
+    "category": "Categorie",
+    "averagePrice": "Suma media a comenzii unici",
+    "descriptionRo": "Descriere RO",
+    "descriptionRu": "Descriere RU"
+  },
+  "workingHours" : {
+    "title" : "Ore de lucru",
+    "from" : "De la",
+    "to" : "Până la",
+    "open" : "Deschis",
+    "closed" : "Închis",
+    "monday" : "Luni",
+    "tuesday" : "Marți",
+    "wednesday" : "Miercuri",
+    "thursday" : "Joi",
+    "friday" : "Vineri",
+    "saturday" : "Sâmbătă",
+    "sunday" : "Duminică"
+  },
+  "contactData" : {
+    "title" : "Date de contact",
+    "firstName" : "Prenumele",
+    "lastName" : "Numele",
+    "phone": "Nr. de telefon",
+    "country" : "Țara",
+    "city" : "Oraș",
+    "street" : "Strada",
+    "postCode" : "Cod poștal"
+  },
+  "photos" : {
+    "title" : "Fotografii",
+    "message" : "Lorem Ipsum este pur și simplu textul fals al tipăririi și al tipăririi, pe când o imprimantă necunoscută a luat o bucătărie de tip și a amestecat-o pentru a face o carte tip specimen. l-au amestecat pentru a face un tip de Lorem Ipsum este că are o normă mai mult sau mai puțin normală.",
+    "remove" : "Șterge",
+    "upload" : "Încarcă",
+    "save" : "Salvează",
+    "crop" : "Imaginea decupată",
+    "miniature" : "Miniatură",
+    "banner" : "Banner",
+    "gallery" : "Galerie"
+  },
+  "filters" : {
+    "title" : "Filtre",
+    "message" : "Specificați caracteristicile"
+  },
+  "additions" : {
+    "title" : "Adăugări și prețuri",
+    "additionsLabel" : "Selectați toate elementele disponibile",
+    "additionsReservationLabel" : "Selectați elementele disponibile pentru rezervare"
+  },
+  "congrats" : {
+    "congratulations" : "Felicitări!",
+    "message" : "Acum localul Dvs este gata de a fi trimis la administratorii StarClub la verificare. In scurt timp veti fi contactat de managerii proiectului. Pentru a trimite localul la aprobare selectati butonul Trimite."
+  }
+}

@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-xs-12">
-    <p class="title"> CONTACT DATA</p>
+    <p class="title">{{ 'contactData.title' | translate }}</p>
   </div>
 </div>
 <form [formGroup]="contactDataForm" (ngSubmit)="onNext()" autocomplete="false">
@@ -8,52 +8,52 @@
     <div class="col-md-6 col-xs-12">
       <div class="form-group">
 
-        <label class="top-offset" for="contact-first-name">Contact first name</label>
+        <label class="top-offset" for="contact-first-name">{{ 'contactData.firstName' | translate }}</label>
         <input
           class="form-control"
           id="contact-first-name"
           formControlName="firstName">
-        <label class="top-offset" for="contact-last-name">Contact last name</label>
+        <label class="top-offset" for="contact-last-name">{{ 'contactData.lastName' | translate }}</label>
         <input
           class="form-control"
           id="contact-last-name"
           formControlName="lastName">
-        <label class="top-offset" for="phone-number">Phone number</label>
+        <label class="top-offset" for="phone-number">{{ 'contactData.phone' | translate }}</label>
         <span
           class="validation-advice validation-advice-text"
           *ngIf="contactDataForm.get('phoneNumber').invalid">
-          Format: +373 999-99-999
+          {{ 'advices.format' | translate }} +373 999-99-999
         </span>
         <input
           class="form-control"
           id="phone-number"
           formControlName="phoneNumber"
         >
-        <label class="top-offset" for="country">Country</label>
+        <label class="top-offset" for="country">{{ 'contactData.country' | translate }}</label>
         <span
           class="validation-advice validation-advice-text"
           *ngIf="contactDataForm.get('country').invalid && contactDataForm.get('country').touched">
-          Obligatoriu
+          {{ 'advices.required' | translate }}
         </span>
         <input
           class="form-control"
           id="country"
           formControlName="country">
-        <label class="top-offset" for="city">City</label>
+        <label class="top-offset" for="city">{{ 'contactData.city' | translate }}</label>
         <span
           class="validation-advice validation-advice-text"
           *ngIf="contactDataForm.get('city').invalid && contactDataForm.get('city').touched">
-          Obligatoriu
+          {{ 'advices.required' | translate }}
         </span>
         <input
           class="form-control"
           id="city"
           formControlName="city">
-        <label class="top-offset">Street</label>
+        <label class="top-offset">{{ 'contactData.street' | translate }}</label>
         <span
           class="validation-advice validation-advice-text"
           *ngIf="contactDataForm.get('street').invalid && contactDataForm.get('street').touched">
-          Obligatoriu
+          {{ 'advices.required' | translate }}
         </span>
         <input
           class="form-control"
@@ -65,7 +65,7 @@
           type="text"
           formControlName="street"
           #street>
-        <label class="top-offset" for="post-code">Post Code</label>
+        <label class="top-offset" for="post-code">{{ 'contactData.postCode' | translate }}</label>
         <input
           class="form-control"
           id="post-code"
@@ -84,15 +84,15 @@
       <div class="row">
         <div class="col-xs-4">
           <div>
-            <button class="btn btn-back btn-block" type="button" (click)="onBack()"><p class="btn-text">Back</p>
+            <button class="btn btn-back btn-block" type="button" (click)="onBack()"><p class="btn-text">{{ 'buttons.back' | translate }}</p>
             </button>
           </div>
         </div>
         <div class="col-xs-4">
-          <button class="btn btn-block" type="button" (click)="onCancel()"><p class="btn-text">Cancel</p></button>
+          <button class="btn btn-block" type="button" (click)="onCancel()"><p class="btn-text">{{ 'buttons.cancel' | translate }}</p></button>
         </div>
         <div class="col-xs-4">
-          <button class="btn btn-success btn-block" type="submit"><p class="btn-text">Next</p></button>
+          <button class="btn btn-success btn-block" type="submit"><p class="btn-text">{{ 'buttons.next' | translate }}</p></button>
         </div>
       </div>
     </div>
