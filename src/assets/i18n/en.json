@@ -1,0 +1,77 @@
+{
+  "header": {
+    "logOut": "log out"
+  },
+  "step": "Step",
+  "buttons": {
+    "back": "Back",
+    "cancel": "Cancel",
+    "next": "Next",
+    "submit" : "Submit"
+  },
+  "advices": {
+    "required": "Required",
+    "max25" : "25 ch. max length",
+    "max250" : "250 ch. max length",
+    "format" : "Format"
+  },
+  "locationInfo": {
+    "title": "Location info",
+    "company": "Legal name",
+    "comercialName": "Comercial name",
+    "discount": "Discount",
+    "reservation": "Activate reservation",
+    "category": "Category",
+    "averagePrice": "Average price",
+    "descriptionRo": "Description RO",
+    "descriptionRu": "Description RU"
+  },
+  "workingHours": {
+    "title": "Working hours",
+    "from": "From",
+    "to": "To",
+    "open": "Open",
+    "closed": "Closed",
+    "monday": "Monday",
+    "tuesday": "Tuesday",
+    "wednesday": "Wednesday",
+    "thursday": "Thursday",
+    "friday": "Friday",
+    "saturday": "Saturday",
+    "sunday": "Sunday"
+  },
+  "contactData" : {
+    "title" : "Contact data",
+    "firstName" : "Contact first name",
+    "lastName" : "Contact last name",
+    "phone": "Phone number",
+    "country" : "Country",
+    "city" : "City",
+    "street" : "Street",
+    "postCode" : "Post Code"
+  },
+  "photos" : {
+    "title" : "Photos",
+    "message" : "Lorem Ipsum is simply dummy text of the printing and typesettind hen an unknown printer took a galley of type and scrambled it to make a type specimen book. scrambled it to make a type Lorem Ipsum is that it has a more-or-less normal.",
+    "remove" : "Remove",
+    "upload" : "Upload",
+    "save" : "Save",
+    "crop" : "Crop Image",
+    "miniature" : "Miniature",
+    "banner" : "Banner",
+    "gallery" : "Gallery"
+  },
+  "filters" : {
+    "title" : "Filters",
+    "message" : "Specify characteristics"
+  },
+  "additions" : {
+    "title" : "Additions and prices",
+    "additionsLabel" : "Select all available elements",
+    "additionsReservationLabel" : "Select all elements available for reservation"
+  },
+  "congrats" : {
+    "congratulations" : "Congratulations!",
+    "message" : "Your local is now ready to be sent to StarClub administrators for review. You will be contacted by project managers soon. To send your location to approval, select the Submit button."
+  }
+}

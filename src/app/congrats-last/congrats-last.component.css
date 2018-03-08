@@ -9,6 +9,7 @@
   padding: 0 10px 0 10px;
   text-align: center;
   color: #7e93a8;
+  white-space: pre-line;
 }
 
 .congrats-message p {

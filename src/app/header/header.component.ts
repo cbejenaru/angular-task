@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-header',
@@ -7,10 +8,16 @@ import {Component, OnInit} from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() {
+  @ViewChild('dropDown') dropDownMenu: ElementRef;
+
+  constructor(public translateService: TranslateService) {
   }
 
   ngOnInit() {
+  }
+
+  onLangSelect(lang: string) {
+    this.translateService.use(lang);
   }
 
 }
