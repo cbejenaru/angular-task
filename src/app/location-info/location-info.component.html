@@ -77,11 +77,7 @@
         class="form-control"
         id="category"
         formControlName="category">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
+        <option *ngFor="let cat of categories">{{ cat }}</option>
       </select>
     </div>
     <div class="col-md-6 col-xs-12">
@@ -97,9 +93,7 @@
         class="form-control"
         id="averagePrice"
         formControlName="averagePrice">
-        <option>100 - 200</option>
-        <option>200 - 500</option>
-        <option>500 - 1000</option>
+        <option *ngFor="let price of prices">{{ price }}</option>
       </select>
     </div>
   </div>

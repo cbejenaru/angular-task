@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
+import {HttpClient} from '@angular/common/http';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 import {NavigationService} from '../navigation.service';
@@ -12,14 +13,20 @@ import Utils from '../shared/utils';
 })
 export class LocationInfoComponent implements OnInit {
   locationInfoForm: FormGroup;
+  company: string = '';
+  categories: String[] = [];
+  prices: String[] = [];
 
   constructor(private router: Router,
-              private navService: NavigationService) {
+              private navService: NavigationService,
+              private httpClient: HttpClient) {
   }
 
   ngOnInit() {
+   this.loadData();
+
     this.locationInfoForm = new FormGroup({
-      company: new FormControl({value: 'STAR HOLDING!', disabled: true}),
+      company: new FormControl({value: this.company, disabled: true}),
       comercialName: new FormControl(null, [Validators.required, Validators.maxLength(25)]),
       category: new FormControl(null, Validators.required),
       descriptionRo: new FormControl(null, [Validators.required, Validators.maxLength(250)]),
@@ -41,6 +48,15 @@ export class LocationInfoComponent implements OnInit {
 
   }
 
+  private loadData() {
+    this.httpClient.get('./assets/mock/first.json').subscribe((data) => {
+      this.company = data['company'];
+      this.locationInfoForm.get('company').setValue(this.company);
+      this.categories = data['categories'];
+      this.prices = data['prices'];
+    });
+  }
+
   onNext() {
     if (this.locationInfoForm.valid) {
       this.router.navigate(['step', ++this.navService.currentStep]);
@@ -51,7 +67,7 @@ export class LocationInfoComponent implements OnInit {
   }
 
   onCancel() {
-    this.locationInfoForm.reset({company: 'STAR HOLDING!'});
+    this.locationInfoForm.reset({company: this.company});
   }
 
   discountValidator(control: FormControl): { [s: string]: boolean } {

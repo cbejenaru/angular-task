@@ -15,3 +15,7 @@
 .congrats-message p {
   margin: 0px;
 }
+.congrats-image {
+  display: block;
+  margin: auto;
+}

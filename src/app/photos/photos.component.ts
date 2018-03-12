@@ -27,7 +27,7 @@ export class PhotosComponent implements OnInit {
   galleryImageChangedEvent: any = '';
   galleryCroppedImage: any = '';
   gallerySaved = false;
-  galleryURLs: string[] = ['https://i.imgur.com/zpLjX04.png'];
+  galleryURLs: string[] = [];
 
 
   constructor(private imageCompressService: Ng2ImgMaxService,
