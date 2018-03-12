@@ -1,0 +1,19 @@
+{
+  "company" : "The Company SRL",
+  "categories" : [
+    "Restaurant clasic",
+    "Restaurant cu specific",
+    "Braserie",
+    "Pizzerie",
+    "Berărie",
+    "Bar",
+    "Fast Food",
+    "Cofetărie, patiserie"
+
+  ],
+  "prices": [
+    "100 - 200",
+    "200 - 500",
+    "500 - 1000"
+  ]
+}

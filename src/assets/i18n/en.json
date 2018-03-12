@@ -72,6 +72,6 @@
   },
   "congrats" : {
     "congratulations" : "Congratulations!",
-    "message" : "Your local is now ready to be sent to StarClub administrators for review. You will be contacted by project managers soon. To send your location to approval, select the Submit button."
+    "message" : "Your local is now ready to be sent to StarClub administrators for review.\nYou will be contacted by project managers soon.\nTo send your location to approval, select the Submit button."
   }
 }
