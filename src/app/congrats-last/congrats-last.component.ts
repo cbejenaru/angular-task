@@ -1,24 +1,19 @@
-import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
-import {NavigationService} from '../navigation.service';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { NavigationService } from '../navigation.service';
 
 @Component({
   selector: 'app-congrats-last',
   templateUrl: './congrats-last.component.html',
-  styleUrls: ['./congrats-last.component.css',
-    '../app.component.css']
+  styleUrls: ['./congrats-last.component.css', '../app.component.css'],
 })
 export class CongratsLastComponent implements OnInit {
+  constructor(private navServ: NavigationService, private router: Router) {}
 
-  constructor(private navServ: NavigationService,
-              private router: Router) {
-  }
-
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   onSend() {
-    let dataToSend = {
+    const dataToSend = {
       step1: JSON.parse(localStorage.getItem('step1')),
       step2: JSON.parse(localStorage.getItem('step2')),
       step3: JSON.parse(localStorage.getItem('step3')),

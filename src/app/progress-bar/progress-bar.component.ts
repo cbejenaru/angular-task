@@ -1,18 +1,15 @@
-import {Component, OnInit} from '@angular/core';
-import {NavigationService} from '../navigation.service';
+import { Component, OnInit } from '@angular/core';
+import { NavigationService } from '../navigation.service';
 
 @Component({
   selector: 'app-progress-bar',
   templateUrl: './progress-bar.component.html',
-  styleUrls: ['./progress-bar.component.css']
+  styleUrls: ['./progress-bar.component.css'],
 })
 export class ProgressBarComponent implements OnInit {
+  constructor(private navSer: NavigationService) {}
 
-  constructor(private navSer: NavigationService) {
-  }
-
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   isActive(step: number): boolean {
     return step === this.navSer.currentStep;

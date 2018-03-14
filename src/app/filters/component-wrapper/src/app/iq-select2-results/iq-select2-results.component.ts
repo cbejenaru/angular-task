@@ -1,13 +1,19 @@
-import {Component, EventEmitter, Input, OnInit, Output, TemplateRef} from '@angular/core';
-import {IqSelect2Item} from '../iq-select2/iq-select2-item';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  TemplateRef,
+} from '@angular/core';
+import { IqSelect2Item } from '../iq-select2/iq-select2-item';
 
 @Component({
   selector: 'iq-select2-results',
   templateUrl: './iq-select2-results.component.html',
-  styleUrls: ['./iq-select2-results.component.css']
+  styleUrls: ['./iq-select2-results.component.css'],
 })
 export class IqSelect2ResultsComponent implements OnInit {
-
   @Input() items: IqSelect2Item[];
   @Input() searchFocused: boolean;
   @Input() selectedItems: IqSelect2Item[];
@@ -16,11 +22,9 @@ export class IqSelect2ResultsComponent implements OnInit {
   activeIndex: number = 0;
   private ussingKeys = false;
 
-  constructor() {
-  }
+  constructor() {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   onItemSelected(item: IqSelect2Item) {
     this.itemSelectedEvent.emit(item);
@@ -47,8 +51,8 @@ export class IqSelect2ResultsComponent implements OnInit {
   }
 
   scrollToElement() {
-    let element = document.getElementById('item_' + this.activeIndex);
-    let container = document.getElementById('resultsContainer');
+    const element = document.getElementById('item_' + this.activeIndex);
+    const container = document.getElementById('resultsContainer');
 
     if (element) {
       container.scrollTop = element.offsetTop;
@@ -81,5 +85,4 @@ export class IqSelect2ResultsComponent implements OnInit {
     });
     return result;
   }
-
 }
