@@ -38,7 +38,7 @@ export class PhotosComponent implements OnInit {
 
   ngOnInit() {
     if (localStorage.getItem('step4') !== null) {
-      let stored = JSON.parse(localStorage.getItem('step4'));
+      const stored = JSON.parse(localStorage.getItem('step4'));
       if (stored.miniatureURL !== '') {
         this.miniatureURL = stored.miniatureURL;
         this.miniatureSaved = true;
