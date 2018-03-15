@@ -1,14 +1,19 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Router} from '@angular/router';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  Validators,
+  FormBuilder,
+} from '@angular/forms';
+import { Router } from '@angular/router';
 import {} from '@types/googlemaps';
 import Utils from '../shared/utils';
-import {NavigationService} from '../navigation.service';
+import { NavigationService } from '../navigation.service';
 
 @Component({
   selector: 'app-contact-data',
   templateUrl: './contact-data.component.html',
-  styleUrls: ['./contact-data.component.css', '../app.component.css']
+  styleUrls: ['./contact-data.component.css', '../app.component.css'],
 })
 export class ContactDataComponent implements OnInit {
   @ViewChild('gmap') gmapElement: any;
@@ -20,34 +25,31 @@ export class ContactDataComponent implements OnInit {
   autocomplete: google.maps.places.Autocomplete;
 
   contactDataForm: FormGroup;
+  phoneValidator = '^\\+373\\s[0-9]{3}-[0-9]{2}-[0-9]{3}$';
 
+  mapProp = {
+    center: this.chisinauLatLng,
+    zoom: 14,
+    mapTypeId: google.maps.MapTypeId.ROADMAP,
+    mapTypeControl: false,
+    streetViewControl: false,
+    fullscreenControl: false,
+    key: 'AIzaSyDb21uXC-hgApdwzkO158N3xbO9KuFbhZo',
+  };
 
-  constructor(private navService: NavigationService,
-              private router: Router) {
-  }
+  constructor(
+    private navService: NavigationService,
+    private router: Router,
+    private formBuilder: FormBuilder,
+  ) {}
 
   ngOnInit() {
-    this.contactDataForm = new FormGroup({
-      firstName: new FormControl(),
-      lastName: new FormControl(),
-      phoneNumber: new FormControl(null, Validators.pattern('^\\+373\\s[0-9]{3}-[0-9]{2}-[0-9]{3}$')),
-      country: new FormControl(null, Validators.required),
-      city: new FormControl(null, Validators.required),
-      street: new FormControl(null, Validators.required),
-      postCode: new FormControl()
-    });
+    this.contactDataForm = this.createForm();
 
-    const mapProp = {
-      center: this.chisinauLatLng,
-      zoom: 14,
-      mapTypeId: google.maps.MapTypeId.ROADMAP,
-      mapTypeControl: false,
-      streetViewControl: false,
-      fullscreenControl: false,
-      key: 'AIzaSyDb21uXC-hgApdwzkO158N3xbO9KuFbhZo'
-
-    };
-    this.map = new google.maps.Map(this.gmapElement.nativeElement, mapProp);
+    this.map = new google.maps.Map(
+      this.gmapElement.nativeElement,
+      this.mapProp,
+    );
 
     this.marker = new google.maps.Marker({
       draggable: true,
@@ -55,13 +57,18 @@ export class ContactDataComponent implements OnInit {
       position: this.chisinauLatLng,
       map: this.map,
       title: 'Location',
-      icon: '../../assets/images/map-icon.png'
+      icon: '../../assets/images/map-icon.png',
     });
+
     this.marker.addListener('dragend', () => {
       this.geocoder.geocode(
         {
-          location: this.marker.getPosition()
-        }, (results: google.maps.GeocoderResult[], status: google.maps.GeocoderStatus) => {
+          location: this.marker.getPosition(),
+        },
+        (
+          results: google.maps.GeocoderResult[],
+          status: google.maps.GeocoderStatus,
+        ) => {
           if (status === google.maps.GeocoderStatus.OK) {
             const address = results[0].formatted_address.split(',');
             this.contactDataForm.get('country').setValue(address[2]);
@@ -70,11 +77,11 @@ export class ContactDataComponent implements OnInit {
           } else {
             console.log(status);
           }
-        }
+        },
       );
     });
 
-    this.map.addListener('click', (event) => {
+    this.map.addListener('click', event => {
       this.marker.setPosition(event.latLng);
       google.maps.event.trigger(this.marker, 'dragend');
     });
@@ -83,13 +90,15 @@ export class ContactDataComponent implements OnInit {
       this.streetInput.nativeElement,
       {
         types: ['geocode'],
-        componentRestrictions: {country: ['MD']}
-      });
+        componentRestrictions: { country: ['MD'] },
+      },
+    );
 
     this.autocomplete.addListener('place_changed', () => {
       const response = this.autocomplete.getPlace();
-      console.log(response);
-      const address = this.streetInput.nativeElement.value.toString().split(',');
+      const address = this.streetInput.nativeElement.value
+        .toString()
+        .split(',');
       let country = response.address_components[2].long_name;
       let city = response.address_components[1].long_name;
       const street = response.address_components[0].long_name;
@@ -97,7 +106,7 @@ export class ContactDataComponent implements OnInit {
         if (component.types.indexOf('country') !== -1) {
           country = component.long_name;
         }
-        if (component.types.indexOf('administrative_area_level_1') !== -1) {
+        if (component.types.indexOf('city') !== -1) {
           city = component.long_name;
         }
       }
@@ -105,39 +114,51 @@ export class ContactDataComponent implements OnInit {
       this.contactDataForm.get('city').setValue(city);
       this.contactDataForm.get('street').setValue(street);
       if (response.place_id) {
-        this.setMarker({placeId: response.place_id});
+        this.setMarker({ placeId: response.place_id });
       } else {
-        this.setMarker({location: this.chisinauLatLng});
+        this.setMarker({ location: this.chisinauLatLng });
       }
     });
 
     if (localStorage.getItem('step3') !== null) {
       let stored = JSON.parse(localStorage.getItem('step3'));
-      Object.keys(this.contactDataForm.controls).forEach(
-        key => {
-          this.contactDataForm.get(key).setValue(stored['form'][key]);
-        }
-      );
+      Object.keys(this.contactDataForm.controls).forEach(key => {
+        this.contactDataForm.get(key).setValue(stored['form'][key]);
+      });
       this.marker.setPosition(stored['LatLng']);
       this.map.setCenter(stored['LatLng']);
     }
+  }
+
+  createForm() {
+    return this.formBuilder.group({
+      firstName: [''],
+      lastName: [''],
+      phoneNumber: ['', [Validators.pattern(this.phoneValidator)]],
+      country: ['', [Validators.required]],
+      city: ['', [Validators.required]],
+      street: ['', [Validators.required]],
+      postCode: [''],
+    });
   }
 
   onNext() {
     if (this.contactDataForm.valid) {
       let data = {
         form: this.contactDataForm.value,
-        LatLng: this.marker.getPosition()
+        LatLng: this.marker.getPosition(),
       };
       localStorage.setItem('step3', JSON.stringify(data));
-      this.router.navigate(['step', ++this.navService.currentStep]);
+      this.navService.currentStep += 1;
+      this.router.navigate(['step', this.navService.currentStep]);
     } else {
       Utils.markFormGroupTouched(<FormGroup>this.contactDataForm);
     }
   }
 
   onBack() {
-    this.router.navigate(['step', --this.navService.currentStep]);
+    this.navService.currentStep -= 1;
+    this.router.navigate(['step', this.navService.currentStep]);
   }
 
   onCancel() {
@@ -147,7 +168,12 @@ export class ContactDataComponent implements OnInit {
   }
 
   setMarker(request: google.maps.GeocoderRequest) {
-    this.geocoder.geocode(request, (results: google.maps.GeocoderResult[], status: google.maps.GeocoderStatus) => {
+    this.geocoder.geocode(
+      request,
+      (
+        results: google.maps.GeocoderResult[],
+        status: google.maps.GeocoderStatus,
+      ) => {
         if (status === google.maps.GeocoderStatus.OK) {
           const geocoderLocation = results[0].geometry.location;
           this.marker.setPosition(geocoderLocation);
@@ -155,7 +181,7 @@ export class ContactDataComponent implements OnInit {
         } else {
           console.log(status);
         }
-      }
+      },
     );
   }
 }

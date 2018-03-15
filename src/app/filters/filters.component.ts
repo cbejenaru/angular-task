@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IqSelect2Item } from './component-wrapper/src/app/iq-select2/iq-select2-item';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { DataService, Option } from './data.service';
 import { NavigationService } from '../navigation.service';
@@ -24,6 +24,7 @@ export class FiltersComponent implements OnInit {
     private dataService: DataService,
     private navService: NavigationService,
     private router: Router,
+    private formBuilder: FormBuilder,
   ) {}
 
   ngOnInit() {
