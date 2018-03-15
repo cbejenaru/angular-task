@@ -77,7 +77,8 @@ export class AdditionsAndPricesComponent implements OnInit {
 
   onNext() {
     localStorage.setItem('step6', JSON.stringify(this.form.value));
-    this.router.navigate(['step', ++this.navService.currentStep]);
+    this.navService.currentStep += 1;
+    this.router.navigate(['step', this.navService.currentStep]);
   }
 
   onCancel() {
@@ -85,7 +86,8 @@ export class AdditionsAndPricesComponent implements OnInit {
   }
 
   onBack() {
-    this.router.navigate(['step', --this.navService.currentStep]);
+    this.navService.currentStep -= 1;
+    this.router.navigate(['step', this.navService.currentStep]);
   }
 
   private initializeAdditonIqSelect2() {
@@ -102,10 +104,10 @@ export class AdditionsAndPricesComponent implements OnInit {
     this.getItems = (ids: string[]) => this.dataService.getItems(ids);
     this.entityToIqSelect2Item = (entity: any) => {
       return {
+        entity,
         id: entity.id,
         text: entity.name,
         imagePath: entity.imagePath,
-        entity: entity,
       };
     };
   }
@@ -126,10 +128,10 @@ export class AdditionsAndPricesComponent implements OnInit {
       this.dataService.getReservationItems(ids);
     this.entityToIqSelect2Item = (entity: any) => {
       return {
+        entity,
         id: entity.id,
         text: entity.name,
         imagePath: entity.imagePath,
-        entity: entity,
       };
     };
   }

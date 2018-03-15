@@ -1,65 +1,43 @@
-import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Router} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  Validators,
+  FormBuilder,
+} from '@angular/forms';
+import { Router } from '@angular/router';
 
-import {NavigationService} from '../navigation.service';
+import { NavigationService } from '../navigation.service';
 import Utils from '../shared/utils';
 
 @Component({
   selector: 'app-working-hours',
   templateUrl: './working-hours.component.html',
-  styleUrls: ['./working-hours.component.css', '../app.component.css']
+  styleUrls: ['./working-hours.component.css', '../app.component.css'],
 })
 export class WorkingHoursComponent implements OnInit {
   workingHoursForm: FormGroup;
   timePattern = '^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$';
-  days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+  days = [
+    'monday',
+    'tuesday',
+    'wednesday',
+    'thursday',
+    'friday',
+    'saturday',
+    'sunday',
+  ];
 
-  constructor(private navService: NavigationService,
-              private router: Router) {
-  }
+  constructor(
+    private navService: NavigationService,
+    private router: Router,
+    private formBuilder: FormBuilder,
+  ) {}
+
+  day = {};
 
   ngOnInit() {
-    this.workingHoursForm = new FormGroup({
-      'monday': new FormGroup({
-        'from': new FormControl({
-          value: null,
-          disabled: false
-        }, [Validators.pattern(this.timePattern), Validators.required]),
-        'to': new FormControl(null, [Validators.pattern(this.timePattern), Validators.required]),
-        'mode': new FormControl('open')
-      }),
-      'tuesday': new FormGroup({
-        'from': new FormControl(null, [Validators.pattern(this.timePattern), Validators.required]),
-        'to': new FormControl(null, [Validators.pattern(this.timePattern), Validators.required]),
-        'mode': new FormControl('open')
-      }),
-      'wednesday': new FormGroup({
-        'from': new FormControl(null, [Validators.pattern(this.timePattern), Validators.required]),
-        'to': new FormControl(null, [Validators.pattern(this.timePattern), Validators.required]),
-        'mode': new FormControl('open')
-      }),
-      'thursday': new FormGroup({
-        'from': new FormControl(null, [Validators.pattern(this.timePattern), Validators.required]),
-        'to': new FormControl(null, [Validators.pattern(this.timePattern), Validators.required]),
-        'mode': new FormControl('open')
-      }),
-      'friday': new FormGroup({
-        'from': new FormControl(null, [Validators.pattern(this.timePattern), Validators.required]),
-        'to': new FormControl(null, [Validators.pattern(this.timePattern), Validators.required]),
-        'mode': new FormControl('open')
-      }),
-      'saturday': new FormGroup({
-        'from': new FormControl(null, [Validators.pattern(this.timePattern), Validators.required]),
-        'to': new FormControl(null, [Validators.pattern(this.timePattern), Validators.required]),
-        'mode': new FormControl('open')
-      }),
-      'sunday': new FormGroup({
-        'from': new FormControl(null, [Validators.pattern(this.timePattern), Validators.required]),
-        'to': new FormControl(null, [Validators.pattern(this.timePattern), Validators.required]),
-        'mode': new FormControl('open')
-      }),
-    });
+    this.workingHoursForm = new FormGroup(this.createFormGroup());
 
     if (localStorage.getItem('step2') !== null) {
       const stored = JSON.parse(localStorage.getItem('step2'));
@@ -76,10 +54,28 @@ export class WorkingHoursComponent implements OnInit {
     }
   }
 
+  createFormGroup() {
+    const group: any = {};
+
+    this.days.forEach(day => {
+      group[day] = this.formBuilder.group({
+        from: ['', [Validators.required, Validators.pattern(this.timePattern)]],
+        to: ['', [Validators.required, Validators.pattern(this.timePattern)]],
+        mode: ['open'],
+      });
+    });
+
+    return group;
+  }
+
   onNext() {
     if (this.workingHoursForm.valid) {
-      this.router.navigate(['step', ++this.navService.currentStep]);
-      localStorage.setItem('step2', JSON.stringify(this.workingHoursForm.value));
+      this.navService.currentStep += 1;
+      this.router.navigate(['step', this.navService.currentStep]);
+      localStorage.setItem(
+        'step2',
+        JSON.stringify(this.workingHoursForm.value),
+      );
     } else {
       for (const day of this.days) {
         Utils.markFormGroupTouched(<FormGroup>this.workingHoursForm.get(day));
@@ -88,7 +84,8 @@ export class WorkingHoursComponent implements OnInit {
   }
 
   onBack() {
-    this.router.navigate(['step', --this.navService.currentStep]);
+    this.navService.currentStep -= 1;
+    this.router.navigate(['step', this.navService.currentStep]);
   }
 
   onCancel() {
@@ -110,5 +107,4 @@ export class WorkingHoursComponent implements OnInit {
     this.workingHoursForm.controls[day].get('from').enable();
     this.workingHoursForm.controls[day].get('to').enable();
   }
-
 }
